@@ -8,8 +8,8 @@ one:
   project_id: 
 
 two:
-  name: MyString
-  description: MyText
-  delivery_minutes: 1
+  name: MyString PartTwo
+  description: MyText PartTwo
+  delivery_minutes: 2
   is_completed: false
   project_id: 
