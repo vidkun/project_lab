@@ -1,8 +1,8 @@
 ## Project Manager
 ### DevPoint Labs Fall 2014
 
-The Project Manager application is developed by the students of DevPoint Labs
+###Objective: 
+Create a RoR application that will encompass basic key concepts of web application via the implementation of specific requirements.
 
-### Objectives
-+ To teach students how to work collaboratively on an application using Github
-+ To allow students to submit their own features and learn from others
+###Process:
+Students will be given tasks/requirements to perform. Students will submit Pull Requests which the staff will merge based on documentation, coding style, test coverage and implementation.
