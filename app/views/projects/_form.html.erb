@@ -1,0 +1,33 @@
+<%= form_for @project do |f| %>
+  <!-- Check if there were any errors saving project and display them if so -->
+  <% if @project.errors.any? %>
+  <div id='error_explanation'>
+    <h2><%= pluralize(@project.errors.count, "error") %> prohibited
+        this project from being saved:</h2>
+    <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+  <!-- Begin rendering the form -->
+  <p>
+    <%= f.label :name, 'Project Name:' %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description, 'Project Description:' %><br>
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :due_date_at, 'Project Due Date:' %><br>
+    <%= f.datetime_select :due_date_at, 
+                          minute_step: 15, 
+                          default: 1.week.from_now, 
+                          order: [:month, :day, :year] %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
