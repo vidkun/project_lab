@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_action :titleize_params, only: [:edit, :update]
 
   def index
-    @projects = Project.all
+    @projects = Project.all.order(:due_date_at)
   end
 
   def show
