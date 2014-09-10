@@ -14,7 +14,9 @@
     <%= simple_format(task.description, {class: 'task_description'}, sanitize: true) %>
   <br>
     Delivery Minutes: <%= task.delivery_minutes %>  |  
-    Status: <%= is_completed ? 'Complete' : 'Incomplete' %>
+    Status: <%= task.is_completed ? 'Complete' : 'Incomplete' %>
+  <br>
+    <%= link_to 'Edit Task', edit_project_task_path(@project, task) %> |
   </p>
 <% end %>
 

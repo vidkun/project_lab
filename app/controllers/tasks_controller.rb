@@ -9,24 +9,28 @@ class TasksController < ApplicationController
   end
 
   def new
+    @project = Project.find(params[:project_id])
     @task = Task.new
   end
 
   def create
-    @task = Task.new(task_params)
+    @project = Project.find(params[:project_id])
+    @task = @project.tasks.create(task_params)
     if @task.save
-      redirect_to @task
+      redirect_to project_path(@project)
     else
       render 'new'
     end
   end
 
   def edit
+
   end
 
   def update
-   if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.'
+    @project = Project.find(params[:project_id])
+    if @task.update(task_params)
+      redirect_to @project, notice: 'Task was successfully updated.'
     else
       render :edit
     end
@@ -39,10 +43,11 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed)
+    params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed, :project_id)
   end
 
   def set_task
+    @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
   end
 
