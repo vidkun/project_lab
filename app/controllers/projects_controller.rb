@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to @project
     else
-      render 'new'
+      render :new
     end
   end
 

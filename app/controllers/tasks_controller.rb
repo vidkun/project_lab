@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to project_path(@project)
     else
-      render 'new'
+      render :new
     end
   end
 
