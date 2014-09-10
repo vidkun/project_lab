@@ -1,0 +1,8 @@
+<h1>Edit Project: <%= @project.name %></h1>
+
+<p>To edit this project, please make your changes on the form below:</p>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', @project %> | 
+<%= link_to 'Delete', @project, method: :delete, data: {confirm: 'Are you sure you want to delete this project?'} %>
