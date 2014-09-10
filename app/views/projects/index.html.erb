@@ -1,5 +1,3 @@
-<h1>DevPoint Labs Project Manager</h1>
-
 <p>DevPoint Labs coders are constantly working on projects to 1UP their 
 coding-ninja skills!
 </p>
@@ -8,8 +6,9 @@ coding-ninja skills!
 created this project management application to keep track of their current 
 progress and remaining tasks. 
 </p>
+<br>
 
-<table>
+<table class='table table-hover'>
   <thead>
     <tr>
       <th>Project Name</th>
@@ -25,9 +24,9 @@ progress and remaining tasks.
         <td><%= project.name %></td>
         <td><%= project.description %></td>
         <td><%= project.due_date_at.localtime %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, 
+        <td><%= link_to 'Show', project, class: 'btn btn-xs btn-default' %></td>
+        <td><%= link_to 'Edit', edit_project_path(project), class: 'btn btn-xs btn-default' %></td>
+        <td><%= link_to 'Destroy', project, class: 'btn btn-xs btn-default', method: :delete, 
                                             data: { 
                                               confirm: 'Are you sure you want to delete this project?' } %></td>
       </tr>
@@ -35,4 +34,3 @@ progress and remaining tasks.
   </tbody>
 </table>
 
-<p>Let's start a <%= link_to 'new project', new_project_path %>!</p>
