@@ -21,12 +21,15 @@
     <%= f.text_field :description %>
   </p>
   <p>
-    <%= f.label :due_date_at, 'Project Due Date:' %><br>
+    <%= f.label :due_date_at, 'Project Due Date (in UTC):' %><br>
     <%= f.datetime_select :due_date_at, 
                           minute_step: 15, 
                           default: 1.week.from_now, 
-                          order: [:month, :day, :year] %>
+                          order: [:month, :day, :year],
+                          include_blank: true,
+                          start_year: Time.now.year %>
   </p>
+
   <p>
     <%= f.submit %>
   </p>
