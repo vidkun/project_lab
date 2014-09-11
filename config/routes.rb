@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  get 'users/index'
+
+  get 'users/show'
+
+  get 'users/create'
+
+  get 'users/new'
+
+  get 'users/edit'
+
+  get 'users/update'
+
+  get 'users/delete'
+
+  get 'users/destroy'
+
   root 'projects#index'  # index page listing out all projects
 
   resources :projects do
