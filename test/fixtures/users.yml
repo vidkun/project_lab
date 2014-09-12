@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  email: MyString
-  phone: MyString
+  email: MyString@domain.com
+  phone: 123-456-7890
 
 two:
   name: MyString
-  email: MyString
-  phone: MyString
+  email: MyString@domain.com
+  phone: (098) 765-4321

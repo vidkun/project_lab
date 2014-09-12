@@ -4,6 +4,12 @@ class TasksControllerTest < ActionController::TestCase
   setup do
     @project = projects(:one)
     @my_task = tasks(:one)
+    @update = {
+      name:       'Update Project',
+      description: 'Yay....Moar work...sssssddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+      delivery_minutes:   30,
+      is_completed: true
+    }
   end
 
   test "should get index" do
