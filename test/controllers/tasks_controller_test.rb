@@ -35,10 +35,10 @@ class TasksControllerTest < ActionController::TestCase
 
   test "should create a task" do
     assert_difference('Task.count') do
-      post :create, { project_id: @my_task.project, task: @my_task } # this task: piece is killing this test
+      post :create, task: @update, project_id: @project
     end
 
-    assert_redirected_to project_task_path(assigns(:task))
+    assert_redirected_to project_path(assigns(:project))
   end
 
 end
