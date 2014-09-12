@@ -41,8 +41,11 @@ class ProjectsController < ApplicationController
   end
 
   private
+
   def project_params
-    params.require(:project).permit(:name, :description, :due_date_at)
+    params.require(:project).permit(:name,
+                                    :description,
+                                    :due_date_at)
   end
 
   def set_project
@@ -52,5 +55,4 @@ class ProjectsController < ApplicationController
   def titleize_params
     @project.name = @project.name.titleize
   end
-
 end

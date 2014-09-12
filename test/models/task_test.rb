@@ -3,7 +3,7 @@ require 'test_helper'
 class TaskTest < ActiveSupport::TestCase
   fixtures :tasks
   
-  test "task name, description, and is_completed must not be empty" do
+  test 'task name, description, and is_completed must not be empty' do
     task = Task.new(name: tasks(:one).name,
                     description: tasks(:one).description,
                     is_completed: tasks(:one).is_completed)
@@ -13,4 +13,3 @@ class TaskTest < ActiveSupport::TestCase
   end
 
 end
-
