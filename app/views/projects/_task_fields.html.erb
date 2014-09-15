@@ -1,9 +1,20 @@
-<div class='nested-fields'>
-  <%= f.inputs do %>
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :delivery_minutes %>
-    <%= f.input :is_completed, :as => :boolean %>
-    <%= link_to_remove_association "remove task", f %>
-  <% end %>
+<div class="nested-fields">
+<div class= 'field form-group'>
+    <%= f.label :name, 'Task Name:' %><br>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class= 'field form-group'>
+    <%= f.label :description, 'Task Description:' %><br>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+  <div class= 'field form-group'>
+    <%= f.label :due_date_at, 'Task Delivery Minutes:' %><br>
+    <%= f.number_field :delivery_minutes %>
+  </div>
+  <div class= 'field form-group'>
+    <%= f.label :is_completed, 'Task Status:' %><br>
+    <%= f.select :is_completed, [['Complete', true], ['Incomplete', false]], 
+                                selected: false, class: 'form-control' %>
+  </div>
+  <%= link_to_remove_association "remove task", f %>
 </div>
