@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class TasksControllerTest < ActionController::TestCase
+    include Devise::TestHelpers
+  
   setup do
     @project = projects(:one)
     @my_task = tasks(:one)
@@ -8,6 +10,8 @@ class TasksControllerTest < ActionController::TestCase
                 description: "This is the descriptionThis is the descriptionThis is the descriptionThis is the descriptionThis is the description",
                 delivery_minutes: 20,
                 is_completed: false }
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

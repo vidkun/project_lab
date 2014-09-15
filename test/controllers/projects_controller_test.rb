@@ -1,6 +1,9 @@
 require 'test_helper'
 
+
 class ProjectsControllerTest < ActionController::TestCase
+    include Devise::TestHelpers
+
   setup do
     @project = projects(:one)
     @update = {
@@ -8,6 +11,8 @@ class ProjectsControllerTest < ActionController::TestCase
       description: 'Yay....Moar work...ay....Moar work...ay....Moar work...ay....Moar work...',
       due_date_at:   '2015-10-12 06:06:06',
     }
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get projects index" do
