@@ -31,7 +31,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
       t.string :name
-      t.string :phone
+      t.integer :phone
 
       t.timestamps
     end
