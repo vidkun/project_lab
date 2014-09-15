@@ -25,13 +25,31 @@
     <%= f.text_field :description, class: 'form-control' %>
   </div>
   <div class= 'form-group'>
+  
     <%= f.label :due_date_at, 'Project Due Date (in UTC):' %><br>
-    <%= f.datetime_select :due_date_at, 
-                          minute_step: 15, 
-                          default: 1.week.from_now, 
-                          order: [:month, :day, :year],
-                          start_year: Time.now.year %>
+    <div class='input-group date' id='datetimepicker1'>
+    <%= f.text_field :due_date_at, class: 'form-control' %>
+    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
   </div>
+  </div>
+  <script type="text/javascript">
+            function nextweek(){
+              var today = new Date();
+              var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+              return nextweek;
+            }
+            $(function () {
+              $('#datetimepicker1').datetimepicker({
+                defaultDate: nextweek(),
+                pickDate: true,
+                pickTime: true,
+                minuteStepping: 15,
+                minDate: moment(),
+              });
+            });
+  </script>
+
   <h3>Tasks</h3>
   <div id="tasks">
     <%= f.fields_for :tasks do |task| %>

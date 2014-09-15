@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 
 # Implement nested forms with cocoon and formtastic
 gem 'cocoon'
-gem 'formtastic'
-
-# For bootstrap 3 datetime picker
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 
