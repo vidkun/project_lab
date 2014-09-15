@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 
 
+# Implement nested forms with cocoon and formtastic
+gem 'cocoon'
+gem 'formtastic'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 # Use postgresql as the database for Active Record
