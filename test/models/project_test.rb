@@ -24,5 +24,13 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal ["can't be in the past"], project.errors[:due_date_at]
   end 
 
+  test "project description must be longer than 50 characters" do
+    project = Project.new(name: "Task",
+                    description: "Not long",
+                    due_date_at: projects(:one).due_date_at)
+    assert project.invalid?
+    assert_equal ["is too short (minimum is 50 characters)"], project.errors[:description]
+  end  
+
 end
 
