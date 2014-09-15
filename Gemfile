@@ -5,6 +5,11 @@ source 'https://rubygems.org'
 gem 'cocoon'
 gem 'formtastic'
 
+# For bootstrap 3 datetime picker
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 # Use postgresql as the database for Active Record
