@@ -5,7 +5,7 @@ class ProjectsControllerTest < ActionController::TestCase
     @project = projects(:one)
     @update = {
       name:       'Update Project',
-      description: 'Yay....Moar work...',
+      description: 'Yay....Moar work...ay....Moar work...ay....Moar work...ay....Moar work...',
       due_date_at:   '2015-10-12 06:06:06',
     }
   end

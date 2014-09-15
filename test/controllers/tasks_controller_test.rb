@@ -4,6 +4,10 @@ class TasksControllerTest < ActionController::TestCase
   setup do
     @project = projects(:one)
     @my_task = tasks(:one)
+    @update = { name: "New project",
+                description: "This is the descriptionThis is the descriptionThis is the descriptionThis is the descriptionThis is the description",
+                delivery_minutes: 20,
+                is_completed: false }
   end
 
   test "should get index" do
@@ -29,10 +33,10 @@ class TasksControllerTest < ActionController::TestCase
 
   test "should create a task" do
     assert_difference('Task.count') do
-      post :create, { project_id: @my_task.project, task: @my_task }
+      post :create, task: @update, project_id: @project
     end
 
-    assert_redirected_to project_task_path(assigns(:task))
+    assert_redirected_to project_path(assigns(:project))
   end
 
 end
