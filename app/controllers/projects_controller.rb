@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :description, :due_date_at)
+    params.require(:project).permit(:name, :description, :due_date_at, tasks_attributes: [:name, :description, :delivery_minutes, :is_completed, :_destroy])
   end
 
   def set_project
