@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :titleize_params, only: [:edit, :update]
 
@@ -37,12 +38,12 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_url, notice: 'Project was successfully deleted.'
+    redirect_to projects_path, notice: 'Project was successfully deleted.'
   end
 
   private
   def project_params
-    params.require(:project).permit(:name, :description, :due_date_at)
+    params.require(:project).permit(:name, :description, :due_date_at, tasks_attributes: [:id, :name, :description, :is_completed, :delivery_minutes, :project_id, :_destroy])
   end
 
   def set_project

@@ -23,10 +23,10 @@ progress and remaining tasks.
       <tr>
         <td><%= project.name %></td>
         <td><%= project.description %></td>
-        <td><%= project.due_date_at.localtime %></td>
-        <td><%= link_to 'Show', project, class: 'btn btn-xs btn-default' %></td>
+        <td><%= project.due_date_at.localtime.strftime("%A, %b %-d, %Y  %l:%M%p") %></td>
+        <td><%= link_to 'View', project, class: 'btn btn-xs btn-default' %></td>
         <td><%= link_to 'Edit', edit_project_path(project), class: 'btn btn-xs btn-default' %></td>
-        <td><%= link_to 'Destroy', project, class: 'btn btn-xs btn-default', method: :delete, 
+        <td><%= link_to 'Delete', project, class: 'btn btn-xs btn-default', method: :delete, 
                                             data: { 
                                               confirm: 'Are you sure you want to delete this project?' } %></td>
       </tr>
