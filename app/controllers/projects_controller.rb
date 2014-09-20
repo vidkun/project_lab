@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :titleize_params, only: [:edit, :update]
+  before_action :find_user
 
   def index
     @projects = Project.all.order(:due_date_at)
@@ -13,10 +14,12 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @project.user_id = current_user.id
   end
 
   def create
     @project = Project.new(project_params)
+    @project.user_id = current_user.id
     titleize_params
     if @project.save
       redirect_to @project
@@ -54,4 +57,8 @@ class ProjectsController < ApplicationController
     @project.name = @project.name.titleize
   end
 
+  def find_user
+    @user = current_user
+    @users = User.all
+  end
 end
