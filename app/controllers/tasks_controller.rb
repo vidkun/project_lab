@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :find_user
+
 
   def index
     @tasks = Task.all
@@ -11,11 +13,14 @@ class TasksController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @task = Task.new
+    @task.user_id = current_user.id
   end
 
   def create
     @project = Project.find(params[:project_id])
     @task = @project.tasks.build(task_params)
+    @task.user_id = current_user.id
+
     if @task.save
       redirect_to project_path(@project)
     else
@@ -43,12 +48,17 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed, :project_id)
+    params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed, :project_id, :user_id)
   end
 
   def set_task
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
+  end
+
+  def find_user
+    @user = current_user
+    @users = User.all
   end
 
 end
