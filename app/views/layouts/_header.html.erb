@@ -11,18 +11,21 @@
       <%= link_to 'DevPoint Labs Project Manager', root_path, class: 'navbar-brand' %>
     </div>
 
+
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
+      <ul class="nav navbar-nav">
         <li><%= link_to current_user.email, user_path(current_user.id) %></li>
-        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        <% else %>
-        <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li><%= link_to 'Start A Project', new_project_path %></li>
         <% if user_signed_in? %>
           <li><%= link_to 'Users', users_path %></li>
+        <% end %>
+        <% if user_signed_in? %>
+        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
