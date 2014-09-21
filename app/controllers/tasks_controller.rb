@@ -13,13 +13,13 @@ class TasksController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @task = Task.new
-    @task.user_id = current_user.id
+    @task.creator = current_user.name
   end
 
   def create
     @project = Project.find(params[:project_id])
     @task = @project.tasks.build(task_params)
-    @task.user_id = current_user.id
+    @task.creator = current_user.name
 
     if @task.save
       redirect_to project_path(@project)
@@ -29,7 +29,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -48,7 +47,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed, :project_id, :user_id)
+    params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed, :project_id, :user_id, :creator)
   end
 
   def set_task

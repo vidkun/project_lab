@@ -16,7 +16,9 @@
   <p>
     <strong class="task_name"><%= task.name %></strong>
   <br>
-    Created by: <%= @users.find(task.user_id).name%>
+    Created by: <%= task.creator%>
+  <br>
+    Assigned to: <%= @users.find(task.user_id).name %>
   <br>
     <%= simple_format(task.description, {class: 'task_description'}, sanitize: true) %>
   <br>

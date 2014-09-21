@@ -11,4 +11,5 @@ class Project < ActiveRecord::Base
       errors.add(:due_date_at, "can't be in the past")
     end
   end
+
 end

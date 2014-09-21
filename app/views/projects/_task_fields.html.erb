@@ -8,6 +8,14 @@
     <%= f.text_field :description, class: 'form-control' %>
   </div>
   <div class= 'field form-group'>
+    <%= f.label :creator, 'Creator:' %><br>
+    <%= f.select :creator, User.all.map {|user| [user.name]}, class: 'form-control' %>
+  </div>
+  <div class= 'field form-group'>
+    <%= f.label :user_id, 'Assign to:' %><br>
+    <%= f.select :user_id, User.all.map {|user| [user.name, user.id]}, class: 'form-control' %>
+  </div>
+  <div class= 'field form-group'>
     <%= f.label :due_date_at, 'Task Delivery Minutes:' %><br>
     <%= f.number_field :delivery_minutes %>
   </div>
