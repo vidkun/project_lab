@@ -7,10 +7,7 @@
     <%= f.label :description, 'Task Description:' %><br>
     <%= f.text_field :description, class: 'form-control' %>
   </div>
-  <div class= 'field form-group'>
-    <%= f.label :creator, 'Task Creator: ' %>
-    <%= f.select :creator, User.all.map {|user| [user.name]}, class: 'form-control' %>
-  </div>
+    <%= f.hidden_field :creator, value: @user.name if f.object.creator.nil?%>
   <div class= 'field form-group'>
     <%= f.label :user_id, 'Assign to: ' %>
     <%= f.select :user_id, User.all.map {|user| [user.name, user.id]}, class: 'form-control' %>
