@@ -3,7 +3,7 @@ FactoryGirl.define do
     factory :first_project do
       name ''
       description 'MyText7890 MyText7890'
-      due_date_at '1915-09-09 15:17:16'
+      due_date_at '2215-09-09 15:17:16'
     end
 
     factory :second_project do

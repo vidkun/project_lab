@@ -4,10 +4,10 @@ class Project < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :description, length: { minimum: 50, 
                                     message: 'description must be more than 50 characters'}
-  # validate :past_due_date
+  validate :past_due_date
 
   def past_due_date
-    if due_date_at <= Time.now
+    if due_date_at <=  Time.now
       errors.add(:due_date_at, "can't be in the past")
     end
   end
