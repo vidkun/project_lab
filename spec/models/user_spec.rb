@@ -7,5 +7,12 @@ RSpec.describe User, :type => :model do
       expect(user.valid?).to eq(false)
       expect(user.errors[:name]).to eq(["can't be blank"])
     end
+
+    it 'should have a valid phone' do
+      user = build(:user)
+      expect(user.valid?).to eq(false)
+      expect(user.errors[:phone]).to include("is not a number")
+      expect(user.errors[:phone]).to include("is the wrong length (should be 10 characters)")
+    end
   end
 end
