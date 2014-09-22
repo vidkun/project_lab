@@ -22,6 +22,12 @@ RSpec.describe User, :type => :model do
         expect(subject.valid?).to eq(false)
         expect(subject.errors[:email]).to include("can't be blank")
       end
+
+      it 'checks for test name' do
+        user = build(:user, :name => 'test')
+        expect(user.valid?).to eq(false)
+        expect(user.errors[:name]).to include("cannot be test")
+      end
     end
 
     it 'will save with all attributes' do
