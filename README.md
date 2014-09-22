@@ -6,3 +6,11 @@ Create a RoR application that will encompass basic key concepts of web applicati
 
 ###Process:
 Students will be given tasks/requirements to perform. Students will submit Pull Requests which the staff will merge based on documentation, coding style, test coverage and implementation.
+
+To login from seed
+email => sam@email.com
+password => password
+
+password is the same for all seed users
+
+Seed file also creates one project for each user. Each user then creates a task in each project and assigns it to the user with an id one below theirs.
