@@ -15,7 +15,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to current_user.email, user_path(current_user.id) %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to current_user.email, user_path(current_user.id) %></li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to 'Start A Project', new_project_path %></li>
