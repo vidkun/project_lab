@@ -9,6 +9,11 @@ RSpec.describe Task, :type => :model do
         expect(subject.valid?).to eq(false)
         expect(subject.errors[:name]).to include("can't be blank")
       end
+
+      it 'check for description length' do
+        expect(subject.valid?).to eq(false)
+        expect(subject.errors[:description]).to include("is too short (minimum is 50 characters)")
+      end
     end
   end
 end
