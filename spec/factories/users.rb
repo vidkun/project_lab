@@ -2,6 +2,10 @@
 
 FactoryGirl.define do
   factory :user do
-    name "User Name"
+
+    factory :first_user do
+      name "User Name"
+      phone 8018018001
+    end
   end
 end
