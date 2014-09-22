@@ -16,3 +16,14 @@ users.each do |user|
     password_confirmation: 'password',
     phone: 8015551234)
 end
+
+
+User.all.each do |user|
+  Project.create!(
+    name: "#{user.name}'s Project",
+    description: "This project was created by #{user.name}. This project was created by #{user.name}. This project was created by #{user.name}. This project was created by #{user.name}. ",
+    due_date_at: "2015-09-29 00:00:00",
+    user_id: user.id)
+end
+
+
