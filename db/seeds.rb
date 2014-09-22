@@ -26,4 +26,16 @@ User.all.each do |user|
     user_id: user.id)
 end
 
+User.all.each do |user|
+  Project.all.each do |project|
+    Task.create!(
+      name: "#{user.name}'s task for #{project.name} ",
+      description: "This task is #{project.name}. This task is in #{project.name}. This task is in #{project.name}. " ,
+      delivery_minutes: 10,
+      is_completed: false,
+      project_id: project.id,
+      creator: user.name,
+      user_id: user.id == 1 ? 5 : user.id - 1)
+  end
+end
 
