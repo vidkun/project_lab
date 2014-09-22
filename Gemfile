@@ -41,3 +41,8 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'devise'
 gem 'cocoon'
+
+group :development, :test do
+  gem 'spring-commands-rspec'
+  gem 'rspec-rails'
+end
