@@ -14,6 +14,11 @@ RSpec.describe Task, :type => :model do
         expect(subject.valid?).to eq(false)
         expect(subject.errors[:description]).to include("is too short (minimum is 50 characters)")
       end
+
+      it 'check delivery_minutes is a number' do
+        expect(subject.valid?).to eq(false)
+        expect(subject.errors[:delivery_minutes]).to include("is not a number")
+      end
     end
   end
 end
