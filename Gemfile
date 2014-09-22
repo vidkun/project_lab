@@ -45,4 +45,5 @@ gem 'cocoon'
 group :development, :test do
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
+  gem "factory_girl_rails", "~> 4.0"
 end
