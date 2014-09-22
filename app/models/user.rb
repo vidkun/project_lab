@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
-  # validate :name_is_not_test
+  validate :name_is_not_test
   validates :phone, numericality: { greater_than: 0 }, length: { is: 10 }
 
   private
