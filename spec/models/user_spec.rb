@@ -2,25 +2,27 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   context "when a new user is about to created" do
-    it 'should have name' do
-      user = build(:user)
-      expect(user.valid?).to eq(false)
-      expect(user.errors[:name]).to eq(["can't be blank"])
-    end
 
-    it 'should have a valid phone' do
-      user = build(:user)
-      expect(user.valid?).to eq(false)
-      expect(user.errors[:phone]).to include("is not a number")
-      expect(user.errors[:phone]).to include("is the wrong length (should be 10 characters)")
-    end
+    context "and it has invalid fields" do
 
-    it 'should have a valid email' do
-      user = build(:user)
-      expect(user.valid?).to eq(false)
-      expect(user.errors[:email]).to include("can't be blank")
-    end
+      subject { build(:user) }
 
+      it 'check the name' do
+        expect(subject.valid?).to eq(false)
+        expect(subject.errors[:name]).to eq(["can't be blank"])
+      end
+
+      it 'check for a valid phone' do
+        expect(subject.valid?).to eq(false)
+        expect(subject.errors[:phone]).to include("is not a number")
+        expect(subject.errors[:phone]).to include("is the wrong length (should be 10 characters)")
+      end
+
+      it 'check for a valid email' do
+        expect(subject.valid?).to eq(false)
+        expect(subject.errors[:email]).to include("can't be blank")
+      end
+    end
 
     it 'will save with all attributes' do
       user = build(:first_user)
