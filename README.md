@@ -12,3 +12,5 @@ email => sam@email.com
 password => password
 
 password is the same for all seed users
+
+Seed file also creates one project for each user. Each user then creates a task in each project and assigns it to the user with an id one below theirs.
