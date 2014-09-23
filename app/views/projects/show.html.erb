@@ -7,6 +7,13 @@
 <h3>Due Date:</h3>
 <p><%= @project.due_date_at.localtime.strftime("%A, %b %-d, %Y  %l:%M%p") %></p>
 
+<h3>Members:</h3>
+<ul>
+  <% @project.users.each do |member|%>
+    <li><%= member.name %></li>
+  <% end %>
+</ul>
+<%= link_to 'Add New Member', new_project_project_member_path(@project), class: "btn btn-default"  %>
 
 
 <h3>Project Tasks:</h3>

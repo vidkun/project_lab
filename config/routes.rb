@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'project_members/new'
+
+  get 'project_members/create'
+
+  get 'project_members/destroy'
+
   root 'projects#index'
  
 

@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   has_many :tasks
+  has_many :project_members
   has_many :users, through: :project_members
 
   accepts_nested_attributes_for :tasks, reject_if: :all_blank, allow_destroy: true
