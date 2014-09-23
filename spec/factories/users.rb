@@ -15,6 +15,7 @@ FactoryGirl.define do
       phone 8018018001
       password 'password'
       email "username+#{SecureRandom.random_number(10000)}@email.com"
+      # sequence(:email) {|n| "username+#{n} "}
     end
   end
 end
