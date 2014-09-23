@@ -115,5 +115,22 @@ RSpec.describe ProjectsController, :type => :controller do
     end
   end
 
+  describe 'DELETE destroy' do
+    before :each do
+      @project = project
+    end
+    
+    it "deletes the project" do
+      expect{
+        delete :destroy, id: @project        
+      }.to change(Project,:count).by(-1)
+    end
+      
+    it "redirects to project#index" do
+      delete :destroy, id: @project
+      expect(response).to redirect_to projects_url
+    end
+  end
+
 
 end
