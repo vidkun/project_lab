@@ -23,7 +23,7 @@
         <td><%= User.all.find(task.user_id).name %></td>
         <td><%= task.creator %></td>
         <td><%= task.delivery_minutes %></td>
-        <td><%= task.is_completed? ? 'Completed' : "Not Complete" %></td>
+        <td><%= task.is_completed? ? 'Completed' : "Incomplete" %></td>
       </tr>
     <% end %>
   </tbody>
