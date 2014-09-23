@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'projects#index'
  
 
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :tasks
+    resources :project_members, :only => [:new, :create, :destroy]
   end
 
   resources :users, :only => [:show, :index]
