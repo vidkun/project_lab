@@ -10,7 +10,7 @@ RSpec.describe ProjectsController, :type => :controller do
       get :index
       expect(response).to be_success
       expect(response).to have_http_status(200)
-      expect(response).to render_template("index")
+      expect(response).to render_template(:index)
     end
 
     it "assigns the @projects variable" do
@@ -24,7 +24,7 @@ RSpec.describe ProjectsController, :type => :controller do
       get :show, id: project
       expect(response).to be_success
       expect(response).to have_http_status(200)
-      expect(response).to render_template("show")
+      expect(response).to render_template(:show)
     end
   end
 
@@ -36,27 +36,33 @@ RSpec.describe ProjectsController, :type => :controller do
     end
   end
 
-  # describe "POST create" do
-  #   it "should create a project" do
-  #     post :create, project: FactoryGirl.attributes_for(:third_project)
-  #     expect(response).to be_success
-  #     expect(assigns(:project)).to be_a_new(Project)
+  describe "POST create" do
+    context "with valid data" do
+      it "should create a project" do
+        expect{
+          post :create, project: FactoryGirl.attributes_for(:third_project)
+        }.to change(Project,:count).by(1)
+      end
 
-  #   end
+      it "redirects to the project page upon save" do
+        post :create, project: FactoryGirl.attributes_for(:third_project)
+        expect(response).to redirect_to(Project.last)
+      end
+    end
 
-  #   # it "redirects to the project page upon save" do
-  #   #   post :create, project: FactoryGirl.attributes_for(:third_project)
-  #   #   expect(response).to redirect_to(project)
-  #   # end
-  # end
-
-# test "should create a project" do
-#     assert_difference('Project.count') do
-#       post :create, project: @update
-#     end
-
-#     assert_redirected_to project_path(assigns(:project))  
-#   end
+    context "with invalid data" do
+      it "does not save the new contact" do
+        expect{
+          post :create, project: FactoryGirl.attributes_for(:first_project)
+        }.to_not change(Project,:count)
+      end
+      
+      it "re-renders the new method" do
+        post :create, project: FactoryGirl.attributes_for(:first_project)
+        expect(response).to render_template :new
+      end
+    end
+  end
 
 
 end
