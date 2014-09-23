@@ -19,12 +19,17 @@ RSpec.describe ProjectsController, :type => :controller do
     end
   end
 
-  describe "GET project" do
+  describe "GET show" do
     it 'successfully shows a project' do
       get :show, id: project
       expect(response).to be_success
       expect(response).to have_http_status(200)
       expect(response).to render_template(:show)
+    end
+
+     it "assigns the requested contact to @contact" do
+      get :show, id: project
+      expect(assigns(:project)).to eq(project)
     end
   end
 
