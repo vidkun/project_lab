@@ -29,7 +29,7 @@
   <br>
     Created by: <%= task.creator%>
   <br>
-    Assigned to: <%= @users.find(task.user_id).name %>
+    Assigned to: <%= task.user.name %>
   <br>
     <%= simple_format(task.description, {class: 'task_description'}, sanitize: true) %>
   <br>
