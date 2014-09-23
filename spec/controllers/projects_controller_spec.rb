@@ -27,7 +27,7 @@ RSpec.describe ProjectsController, :type => :controller do
       expect(response).to render_template(:show)
     end
 
-     it "assigns the requested contact to @contact" do
+     it "assigns the requested project to @project" do
       get :show, id: project
       expect(assigns(:project)).to eq(project)
     end
