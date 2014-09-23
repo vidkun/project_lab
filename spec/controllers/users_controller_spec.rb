@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
 
+  login_user(FactoryGirl.create(:login_user))
+
   describe "GET index" do
     it "successfully gets the index page" do
       get :index
