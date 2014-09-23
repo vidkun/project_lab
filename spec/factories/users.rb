@@ -16,5 +16,12 @@ FactoryGirl.define do
       password 'password'
       sequence(:email) {|n| "username+#{n}@email.com"}
     end
+
+    factory :invalid_user do
+      name "username"
+      phone 'bill'
+      password 'nope'
+      sequence(:email) {|n| "username+#{n}@email.com"}
+    end
   end
 end
