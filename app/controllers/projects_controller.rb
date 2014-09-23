@@ -14,12 +14,12 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @project.user_id = current_user.id
+    @project.creator = current_user.name
   end
 
   def create
     @project = Project.new(project_params)
-    @project.user_id = current_user.id
+    @project.creator = current_user.name
     titleize_params
     if @project.save
       redirect_to @project
@@ -47,7 +47,7 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :description, :due_date_at, :user_id, tasks_attributes: [:id, :name, :description, :is_completed, :delivery_minutes, :project_id, :_destroy, :user_id, :creator])
+    params.require(:project).permit(:name, :description, :due_date_at, :creator, tasks_attributes: [:id, :name, :description, :is_completed, :delivery_minutes, :project_id, :_destroy, :user_id, :creator])
   end
 
   def set_project
