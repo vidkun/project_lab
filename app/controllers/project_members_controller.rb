@@ -16,8 +16,9 @@ class ProjectMembersController < ApplicationController
   end
 
   def destroy
+    @project_member = ProjectMember.find(params[:id])
     @project_member.destroy
-    redirect_to projects_url, notice: 'Task was successfully deleted.'
+    redirect_to project_path(@project), notice: 'Member was successfully deleted.'
   end
 
   private
