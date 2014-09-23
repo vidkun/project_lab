@@ -43,6 +43,7 @@ gem 'devise'
 gem 'cocoon'
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
 end
