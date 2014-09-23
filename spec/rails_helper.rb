@@ -21,7 +21,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
 
-  config.before(:suite) do
+  config.after(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
