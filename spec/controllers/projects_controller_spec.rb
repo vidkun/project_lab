@@ -53,12 +53,12 @@ RSpec.describe ProjectsController, :type => :controller do
     context "with invalid data" do
       it "does not save the new contact" do
         expect{
-          post :create, project: FactoryGirl.attributes_for(:first_project)
+          post :create, project: FactoryGirl.attributes_for(:invalid_project)
         }.to_not change(Project,:count)
       end
       
       it "re-renders the new method" do
-        post :create, project: FactoryGirl.attributes_for(:first_project)
+        post :create, project: FactoryGirl.attributes_for(:invalid_project)
         expect(response).to render_template :new
       end
     end

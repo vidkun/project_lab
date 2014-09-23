@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :project do
-    factory :first_project do
+    factory :invalid_project do
       name ''
       description 'MyText7890 MyText7890'
-      due_date_at (Time.now + 1.month)
+      due_date_at (Time.now - 1.month)
     end
 
     factory :second_project do
