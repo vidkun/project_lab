@@ -15,6 +15,14 @@ RSpec.describe RegistrationsController, :type => :controller do
         }.to change(User, :count).by(1)
       end
     end
+
+    describe 'failure' do
+      it 'should not create a user' do
+        expect {
+          post :create, user: FactoryGirl.attributes_for(:invalid_user)
+        }.to_not change(User, :count)
+      end
+    end
   end
 
 end
