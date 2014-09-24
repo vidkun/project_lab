@@ -20,19 +20,19 @@ login_user(FactoryGirl.create(:login_user))
     # end
   end
 
-  # describe 'GET show' do
-  #   it 'successfully shows a task' do
-  #     get :show, id: task
-  #     expect(response).to be_success
-  #     expect(response).to have_http_status(200)
-  #     expect(response).to render_template(:show)
-  #   end
+  describe 'GET show' do
+    it 'successfully shows a task' do
+      get :show, project_id: project.id, id: task
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      expect(response).to render_template(:show)
+    end
 
   #    it 'assigns the requested task to @task' do
   #     get :show, id: task
   #     expect(assigns(:task)).to eq(task)
   #   end
-  # end
+  end
 
   # describe 'GET new' do
   #   it 'should get new' do
