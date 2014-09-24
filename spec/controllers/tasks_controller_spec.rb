@@ -63,10 +63,10 @@ login_user(FactoryGirl.create(:login_user))
         }.to_not change(Task,:count)
       end
       
-  #     it 're-renders the new method' do
-  #       post :create, project_id: project.id, task: FactoryGirl.attributes_for(:invalid_task)
-  #       expect(response).to render_template :new
-  #     end
+      it 're-renders the new method' do
+        post :create, project_id: project.id, task: FactoryGirl.attributes_for(:invalid_task)
+        expect(response).to render_template :new
+      end
     end
   end
 
