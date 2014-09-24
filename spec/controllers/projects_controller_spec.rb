@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ProjectsController, :type => :controller do
 
-  before { single_login_user(create(:login_user)) }
-  let(:project) { create(:second_project) }
+  let(:user_logged_in) { create(:login_user) }
+  before { single_login_user(user_logged_in) }
+  let!(:project) { create(:second_project) }
+  let!(:project_owned) { create(:second_project, name:'Owned Project',creator: user_logged_in) }
 
   describe 'GET index' do
     it 'successfully gets the index page' do
@@ -13,23 +15,28 @@ RSpec.describe ProjectsController, :type => :controller do
       expect(response).to render_template(:index)
     end
 
-    it 'assigns the @projects variable' do
+    it 'assigns the @projects variable with only projects owned' do
       get :index
-      expect(assigns(:projects)).to eq([project])
+      expect(assigns(:projects)).to eq([project_owned])
     end
   end
 
   describe 'GET show' do
-    it 'successfully shows a project' do
-      get :show, id: project
+    it 'successfully shows an owned project' do
+      get :show, id: project_owned
       expect(response).to be_success
       expect(response).to have_http_status(200)
       expect(response).to render_template(:show)
     end
 
      it 'assigns the requested project to @project' do
+      get :show, id: project_owned
+      expect(assigns(:project)).to eq(project_owned)
+     end
+
+    it 'should not show a project not owned' do
       get :show, id: project
-      expect(assigns(:project)).to eq(project)
+      expect(response).to redirect_to(root_path)
     end
   end
 
