@@ -2,9 +2,12 @@ class Project < ActiveRecord::Base
   has_many :tasks
   has_many :project_members
   has_many :users, through: :project_members
+  belongs_to  :creator, class_name: "User", foreign_key: 'user_id'
 
   accepts_nested_attributes_for :tasks, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :project_members, reject_if: :all_blank, allow_destroy: true
+
+  validates :creator, presence: true
   validates :name, presence: true, uniqueness: true
   validates :description, length: { minimum: 50, 
                                     message: 'description must be more than 50 characters'}
