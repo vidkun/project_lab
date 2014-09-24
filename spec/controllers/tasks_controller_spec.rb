@@ -98,11 +98,12 @@ login_user(FactoryGirl.create(:login_user))
       end
     end
     
-  #   context 'invalid attributes' do
-  #     it 'located the requested @project' do
-  #       put :update, id: @project, project: FactoryGirl.attributes_for(:invalid_project)
-  #       expect(assigns(:project)).to eq(@project)      
-  #     end
+    context 'invalid attributes' do
+      it 'located the requested @task' do
+        put :update, project_id: project.id, id: task,
+                     task: FactoryGirl.attributes_for(:invalid_task)
+        expect(assigns(:task)).to eq(task)      
+      end
       
   #     it "does not change @project's attributes" do
   #       put :update, id: @project, 
@@ -116,7 +117,7 @@ login_user(FactoryGirl.create(:login_user))
   #       put :update, id: @project, project: FactoryGirl.attributes_for(:invalid_project)
   #       expect(response).to render_template :edit
   #     end
-  #   end
+    end
   end
 
   # describe 'DELETE destroy' do
