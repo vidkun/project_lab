@@ -105,13 +105,13 @@ login_user(FactoryGirl.create(:login_user))
         expect(assigns(:task)).to eq(task)      
       end
       
-  #     it "does not change @project's attributes" do
-  #       put :update, id: @project, 
-  #         project: FactoryGirl.attributes_for(:project, name: 'newname', description: ('a' * 20))
-  #       @project.reload
-  #       expect(@project.name).to_not eq('newname')
-  #       expect(@project.description).to eq(project.description)
-  #     end
+      it "does not change @task's attributes" do
+        put :update, project_id: project.id, id: task,
+                     task: FactoryGirl.attributes_for(:invalid_task, description: ('a' * 20))
+        task.reload
+        expect(task.name).to_not eq('newname')
+        expect(task.description).to eq(task.description)
+      end
       
   #     it 're-renders the edit method' do
   #       put :update, id: @project, project: FactoryGirl.attributes_for(:invalid_project)
