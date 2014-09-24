@@ -69,65 +69,60 @@ RSpec.describe ProjectsController, :type => :controller do
     end
   end
 
-  describe 'PUT update' do
-    before :each do
-      @project = project
-    end
+  describe 'PATCH update' do
     
     context 'with valid attributes' do
       it 'located the requested @project' do
-        put :update, id: @project, project: FactoryGirl.attributes_for(:second_project)
-        expect(assigns(:project)).to eq(@project)      
+        patch :update, id: project, project: FactoryGirl.attributes_for(:second_project)
+        expect(assigns(:project)).to eq(project)      
       end
     
       it "changes @project's attributes" do
-        put :update, id: @project, 
+        patch :update, id: project, 
           project: FactoryGirl.attributes_for(:project, name: 'newname', description: ('a' * 50))
-        @project.reload
-        expect(@project.name).to eq('newname')
-        expect(@project.description).to eq(('a' * 50))
+        project.reload
+        expect(project.name).to eq('newname')
+        expect(project.description).to eq(('a' * 50))
       end
     
       it 'redirects to the updated project' do
-        put :update, id: @project, project: FactoryGirl.attributes_for(:second_project)
-        expect(response).to redirect_to @project
+        patch :update, id: project, project: FactoryGirl.attributes_for(:second_project)
+        expect(response).to redirect_to project
       end
     end
     
     context 'invalid attributes' do
       it 'located the requested @project' do
-        put :update, id: @project, project: FactoryGirl.attributes_for(:invalid_project)
-        expect(assigns(:project)).to eq(@project)      
+        patch :update, id: project, project: FactoryGirl.attributes_for(:invalid_project)
+        expect(assigns(:project)).to eq(project)      
       end
       
       it "does not change @project's attributes" do
-        put :update, id: @project, 
+        patch :update, id: project, 
           project: FactoryGirl.attributes_for(:project, name: 'newname', description: ('a' * 20))
-        @project.reload
-        expect(@project.name).to_not eq('newname')
-        expect(@project.description).to eq(project.description)
+        project.reload
+        expect(project.name).to_not eq('newname')
+        expect(project.description).to eq(project.description)
       end
       
       it 're-renders the edit method' do
-        put :update, id: @project, project: FactoryGirl.attributes_for(:invalid_project)
+        patch :update, id: project, project: FactoryGirl.attributes_for(:invalid_project)
         expect(response).to render_template :edit
       end
     end
   end
 
   describe 'DELETE destroy' do
-    before :each do
-      @project = project
-    end
     
     it 'deletes the project' do
+      @project = project
       expect{
-        delete :destroy, id: @project        
+        delete :destroy, id: project        
       }.to change(Project,:count).by(-1)
     end
       
     it 'redirects to project#index' do
-      delete :destroy, id: @project
+      delete :destroy, id: project
       expect(response).to redirect_to projects_url
     end
   end
