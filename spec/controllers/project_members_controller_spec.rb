@@ -15,7 +15,7 @@ RSpec.describe ProjectMembersController, :type => :controller do
 
   describe 'POST create' do
     context 'with valid info' do
-      it 'should create a new project member (including the creator)' do
+      it 'should create a new project member' do
         expect{
           post :create, project_id: project.id,
                         project_member: {user_id: 1}
