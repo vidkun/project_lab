@@ -19,7 +19,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe 'GET show' do
     it 'successfully shows a user' do
-      user = FactoryGirl.create(:login_user) 
+      user = FactoryGirl.create(:login_user)
       get :show, id: user
       expect(response).to be_success
       expect(response).to have_http_status(200)
