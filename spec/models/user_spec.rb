@@ -47,7 +47,7 @@ RSpec.describe User, :type => :model do
       it 'can be deleted' do
         user_with_task.reload
         expect{
-          expect(user.delete_task(subject)).to_not be_nil
+          expect(user_with_task.delete_task(subject)).to_not be_nil
         }.to change(Task, :count).by(-1)
       end
     end
