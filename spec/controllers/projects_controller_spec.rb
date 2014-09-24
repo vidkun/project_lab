@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProjectsController, :type => :controller do
 
-  login_user(FactoryGirl.create(:login_user))
+  before { single_login_user(create(:login_user)) }
   let(:project) { create(:second_project) }
 
   describe 'GET index' do
