@@ -14,6 +14,7 @@ FactoryGirl.define do
       name "username"
       phone 8018018001
       password 'password'
+      password_confirmation 'password'
       sequence(:email) {|n| "username+#{n}@email.com"}
     end
 

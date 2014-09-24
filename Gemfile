@@ -44,6 +44,7 @@ gem 'cocoon'
 
 group :development, :test do
   gem 'pry-rails'
+  gem 'pry-nav'
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
 end
