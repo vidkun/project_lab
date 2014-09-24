@@ -13,13 +13,13 @@ class TasksController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @task = Task.new
-    @task.creator = current_user.name
+    @task.creator = current_user
   end
 
   def create
     @project = Project.find(params[:project_id])
     @task = @project.tasks.build(task_params)
-    @task.creator = current_user.name
+    @task.creator = current_user
 
     if @task.save
       redirect_to project_path(@project)
@@ -41,8 +41,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task.destroy
-    redirect_to projects_url, notice: 'Task was successfully deleted.'
+    notice = current_user.delete_task(@task) ? 'Task was successfully deleted.' : 'Could not delete task'
+    redirect_to projects_url, notice: notice
   end
 
   private
