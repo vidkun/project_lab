@@ -71,10 +71,6 @@ login_user(FactoryGirl.create(:login_user))
   end
 
   describe 'PUT update' do
-  #   before :each do
-  #     @project = project
-  #   end
-    
     context 'with valid attributes' do
       it 'located the requested @task' do
         put :update, project_id: project.id, id: task,
@@ -121,21 +117,17 @@ login_user(FactoryGirl.create(:login_user))
     end
   end
 
-  # describe 'DELETE destroy' do
-  #   before :each do
-  #     @project = project
-  #   end
-    
-  #   it 'deletes the project' do
-  #     expect{
-  #       delete :destroy, id: @project        
-  #     }.to change(Project,:count).by(-1)
-  #   end
+  describe 'DELETE destroy' do
+    # it 'deletes the task' do
+    #   expect{
+    #     delete :destroy, project_id: project.id, id: task
+    #   }.to change(Task,:count).by(-1)
+    # end
       
-  #   it 'redirects to project#index' do
-  #     delete :destroy, id: @project
-  #     expect(response).to redirect_to projects_url
-  #   end
-  # end
+    it 'redirects to project' do
+      delete :destroy, project_id: project.id, id: task
+      expect(response).to redirect_to projects_url
+    end
+  end
 
 end
