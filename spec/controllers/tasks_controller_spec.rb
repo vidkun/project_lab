@@ -34,13 +34,13 @@ login_user(FactoryGirl.create(:login_user))
     end
   end
 
-  # describe 'GET new' do
-  #   it 'should get new' do
-  #     get :new
-  #     expect(response).to be_success
-  #     expect(response).to have_http_status(200)
-  #   end
-  # end
+  describe 'GET new' do
+    it 'should get new' do
+      get :new, project_id: project.id
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+    end
+  end
 
   # describe 'POST create' do
   #   context 'with valid data' do
