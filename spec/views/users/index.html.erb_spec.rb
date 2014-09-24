@@ -1,8 +1,8 @@
 require "rails_helper"
 
 describe "users/index" do
-  let(:first_user) { FactoryGirl.create(:login_user, :name => "Grizz")}
-  let(:second_user) { FactoryGirl.create(:login_user, :name => "Bo")}
+  let!(:first_user) { FactoryGirl.create(:login_user, :name => "Grizz")}
+  let!(:second_user) { FactoryGirl.create(:login_user, :name => "Bo")}
 
   it "displays all the widgets" do
     assign(:users, User.all )
