@@ -10,12 +10,14 @@ FactoryGirl.define do
       name 'Second Project Name'
       description 'MyText PartTwo MyText PartTwo MyText PartTwo MyText PartTwo MyText PartTwo'
       due_date_at (Time.now + 1.month)
+      association :creator, factory: :login_user
     end
 
     factory :third_project do
       name 'Third Project Name'
       description 'MyText PartTwo MyText PartTwo MyText PartTwo MyText PartTwo MyText PartTwo'
       due_date_at (Time.now + 1.month)
+      association :creator, factory: :login_user
     end
   end
 end
