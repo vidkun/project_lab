@@ -8,5 +8,17 @@ FactoryGirl.define do
       description "This is the task description. This is the task description. This is the task description."
       delivery_minutes 20
     end
+
+    factory :task_two do
+      name "Task name two"
+      description "This is the task description. This is the task description. This is the task description."
+      delivery_minutes 20
+    end
+
+    factory :invalid_task do
+      name ""
+      description "This is the task description. This is the task description."
+      delivery_minutes "four"
+    end
   end
 end
