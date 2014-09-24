@@ -18,8 +18,21 @@ RSpec.describe ProjectMembersController, :type => :controller do
       it 'should create a new project member' do
         expect{
           post :create, project_id: project.id,
-                        project_member: FactoryGirl.attributes_for(:project_member)
+                        project_member: {user_id: 1}
         }.to change(ProjectMember,:count).by(1)
+      end
+    end
+
+    context 'with invalid data' do
+      it 'does not save the new project member' do
+        expect{
+          post :create, project_id: project.id, project_member: {user_id: 'a'}
+        }.to_not change(ProjectMember,:count)
+      end
+      
+      it 're-renders the new method' do
+        post :create, project_id: project.id, project_member: {user_id: 'a'}
+        expect(response).to render_template :new
       end
     end
   end
