@@ -13,10 +13,21 @@ class Project < ActiveRecord::Base
                                     message: 'description must be more than 50 characters'}
   validate :past_due_date
 
+  before_create :add_creator_as_project_member
+
   def past_due_date
     if due_date_at <=  Time.now
       errors.add(:due_date_at, "can't be in the past")
     end
+  end
+
+  def members
+    self.users
+  end
+
+  private
+  def add_creator_as_project_member
+    self.users << self.creator
   end
 
 end
