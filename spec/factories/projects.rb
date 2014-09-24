@@ -19,5 +19,19 @@ FactoryGirl.define do
       due_date_at (Time.now + 1.month)
       association :creator, factory: :login_user
     end
+
+    factory :fourth_project do
+      name 'Fourth Project Name'
+      description 'MyText PartTwo MyText PartTwo MyText PartTwo MyText PartTwo MyText PartTwo'
+      due_date_at (Time.now + 1.month)
+      association :creator, factory: :login_user
+    end
+
+    factory :project_without_access do
+      name 'No Access Project Name'
+      description 'MyText PartTwo MyText PartTwo MyText PartTwo MyText PartTwo MyText PartTwo'
+      due_date_at (Time.now + 1.month)
+      association :creator, factory: :first_user
+    end
   end
 end
