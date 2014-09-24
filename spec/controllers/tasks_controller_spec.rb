@@ -42,19 +42,19 @@ login_user(FactoryGirl.create(:login_user))
     end
   end
 
-  # describe 'POST create' do
-  #   context 'with valid data' do
-  #     it 'should create a project' do
-  #       expect{
-  #         post :create, project: FactoryGirl.attributes_for(:third_project)
-  #       }.to change(Project,:count).by(1)
-  #     end
+  describe 'POST create' do
+    context 'with valid data' do
+      it 'should create a task' do
+        expect{
+          post :create, project_id: project.id, task: FactoryGirl.attributes_for(:task_two)
+        }.to change(Task,:count).by(1)
+      end
 
   #     it 'redirects to the project page upon save' do
   #       post :create, project: FactoryGirl.attributes_for(:third_project)
   #       expect(response).to redirect_to(Project.last)
   #     end
-  #   end
+    end
 
   #   context 'with invalid data' do
   #     it 'does not save the new project' do
@@ -68,7 +68,7 @@ login_user(FactoryGirl.create(:login_user))
   #       expect(response).to render_template :new
   #     end
   #   end
-  # end
+  end
 
   # describe 'PUT update' do
   #   before :each do
