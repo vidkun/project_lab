@@ -1,5 +1,5 @@
 <div class="nested-fields">
-<div class= 'field form-group'>
+  <div class= 'field form-group'>
     <%= f.label :name, 'Task Name:' %><br>
     <%= f.text_field :name, class: 'form-control' %>
   </div>
@@ -10,7 +10,7 @@
     <%= f.hidden_field :creator, value: @user.name if f.object.creator.nil?%>
   <div class= 'field form-group'>
     <%= f.label :user_id, 'Assign to: ' %>
-    <%= f.select :user_id, User.all.map {|user| [user.name, user.id]}, class: 'form-control' %>
+    <%= f.select :user_id, @project.users.all.map {|user| [user.name, user.id]}, class: 'form-control' %>
   </div>
   <div class= 'field form-group'>
     <%= f.label :due_date_at, 'Task Delivery Minutes:' %><br>

@@ -23,7 +23,7 @@ User.all.each do |user|
     name: "#{user.name}'s Project",
     description: "This project was created by #{user.name}. This project was created by #{user.name}. This project was created by #{user.name}. This project was created by #{user.name}. ",
     due_date_at: "2015-09-29 00:00:00",
-    user_id: user.id)
+    creator: user.name)
 end
 
 User.all.each do |user|
