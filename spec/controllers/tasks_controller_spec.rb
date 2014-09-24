@@ -70,16 +70,17 @@ login_user(FactoryGirl.create(:login_user))
     end
   end
 
-  # describe 'PUT update' do
+  describe 'PUT update' do
   #   before :each do
   #     @project = project
   #   end
     
-  #   context 'with valid attributes' do
-  #     it 'located the requested @project' do
-  #       put :update, id: @project, project: FactoryGirl.attributes_for(:second_project)
-  #       expect(assigns(:project)).to eq(@project)      
-  #     end
+    context 'with valid attributes' do
+      it 'located the requested @task' do
+        put :update, project_id: project.id, id: task,
+                     task: FactoryGirl.attributes_for(:task_two)
+        expect(assigns(:task)).to eq(task)      
+      end
     
   #     it "changes @project's attributes" do
   #       put :update, id: @project, 
@@ -93,7 +94,7 @@ login_user(FactoryGirl.create(:login_user))
   #       put :update, id: @project, project: FactoryGirl.attributes_for(:second_project)
   #       expect(response).to redirect_to @project
   #     end
-  #   end
+    end
     
   #   context 'invalid attributes' do
   #     it 'located the requested @project' do
@@ -114,7 +115,7 @@ login_user(FactoryGirl.create(:login_user))
   #       expect(response).to render_template :edit
   #     end
   #   end
-  # end
+  end
 
   # describe 'DELETE destroy' do
   #   before :each do
