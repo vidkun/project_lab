@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ProjectMembersController, :type => :controller do
 
   before { single_login_user(create(:login_user)) }
-  let(:project) { create(:second_project) }
+  let!(:project) { create(:second_project) }
 
   describe 'GET new' do
     it 'returns http success' do
@@ -15,7 +15,7 @@ RSpec.describe ProjectMembersController, :type => :controller do
 
   describe 'POST create' do
     context 'with valid info' do
-      it 'should create a new project member' do
+      it 'should create a new project member (including the creator)' do
         expect{
           post :create, project_id: project.id,
                         project_member: {user_id: 1}
