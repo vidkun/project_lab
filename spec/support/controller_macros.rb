@@ -1,6 +1,6 @@
 module ControllerMacros
   def login_user(user_to_login=nil, context=:each, conditionals={})
-    binding.pry
+    # binding.pry
     # context = *context if context.is_a? Array
     before(context, conditionals) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
