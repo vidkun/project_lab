@@ -25,9 +25,15 @@ class Project < ActiveRecord::Base
     self.users
   end
 
+  def authorized?(user)
+    # binding.pry
+    return true if self.members.include? user
+  end
+
   private
   def add_creator_as_project_member
     self.users << self.creator
   end
+
 
 end

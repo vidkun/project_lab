@@ -5,14 +5,17 @@ class ProjectsController < ApplicationController
   before_action :find_user
 
   def index
-    # @projects = Project.all.order(:due_date_at)
     @projects = Project.includes(
                         :project_members).where(
                         "project_members.user_id" => current_user).all.order(:due_date_at)
   end
 
   def show
-    @tasks = @project.tasks
+    if @project.authorized? @user
+      @tasks = @project.tasks
+    else
+      redirect_to projects_path
+    end
   end
 
   def new
