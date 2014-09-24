@@ -50,10 +50,10 @@ login_user(FactoryGirl.create(:login_user))
         }.to change(Task,:count).by(1)
       end
 
-  #     it 'redirects to the project page upon save' do
-  #       post :create, project: FactoryGirl.attributes_for(:third_project)
-  #       expect(response).to redirect_to(Project.last)
-  #     end
+      it 'redirects to the project page upon save' do
+        post :create, project_id: project.id, task: FactoryGirl.attributes_for(:task_two)
+        expect(response).to redirect_to(Project.last)
+      end
     end
 
   #   context 'with invalid data' do
