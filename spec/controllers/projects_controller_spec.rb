@@ -26,7 +26,6 @@ RSpec.describe ProjectsController, :type => :controller do
       get :index
       expect(assigns(:projects)).to eq([project, second_project]) 
       expect(assigns(:projects)).to_not include(project_without_access) 
-      # .each do |project| project.creator || project.members include current_user
     end
   end
 
@@ -38,7 +37,13 @@ RSpec.describe ProjectsController, :type => :controller do
       expect(response).to render_template(:show)
     end
 
-     it 'assigns the requested project to @project' do
+    it 'fails to show a project user is not authorized to access' do
+      get :show, id: project_without_access
+      expect(response).to_not be_success
+      # expect(response).to redirect_to(:index)
+    end
+
+    it 'assigns the requested project to @project' do
       get :show, id: project
       expect(assigns(:project)).to eq(project)
     end
