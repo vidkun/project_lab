@@ -51,6 +51,13 @@ RSpec.describe Project, :type => :model do
         expect(subject.errors[:due_date_at].any?).to eq(false)
       end
 
+      it 'should add the creator as a team member' do
+        expect(subject.valid?).to eq(true)
+        subject.save!
+
+        expect(subject.members).to include(subject.creator)
+      end
+
     end
   end
 end
