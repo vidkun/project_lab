@@ -28,10 +28,10 @@ login_user(FactoryGirl.create(:login_user))
       expect(response).to render_template(:show)
     end
 
-  #    it 'assigns the requested task to @task' do
-  #     get :show, id: task
-  #     expect(assigns(:task)).to eq(task)
-  #   end
+     it 'assigns the requested task to @task' do
+      get :show, project_id: project.id, id: task
+      expect(assigns(:task)).to eq(task)
+    end
   end
 
   # describe 'GET new' do
