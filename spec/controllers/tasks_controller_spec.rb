@@ -50,24 +50,24 @@ login_user(FactoryGirl.create(:login_user))
         }.to change(Task,:count).by(1)
       end
 
-      it 'redirects to the project page upon save' do
+      it 'redirects to the task page upon save' do
         post :create, project_id: project.id, task: FactoryGirl.attributes_for(:task_two)
         expect(response).to redirect_to(Project.last)
       end
     end
 
-  #   context 'with invalid data' do
-  #     it 'does not save the new project' do
-  #       expect{
-  #         post :create, project: FactoryGirl.attributes_for(:invalid_project)
-  #       }.to_not change(Project,:count)
-  #     end
+    context 'with invalid data' do
+      it 'does not save the new task' do
+        expect{
+          post :create, project_id: project.id, task: FactoryGirl.attributes_for(:invalid_task)
+        }.to_not change(Task,:count)
+      end
       
   #     it 're-renders the new method' do
-  #       post :create, project: FactoryGirl.attributes_for(:invalid_project)
+  #       post :create, project_id: project.id, task: FactoryGirl.attributes_for(:invalid_task)
   #       expect(response).to render_template :new
   #     end
-  #   end
+    end
   end
 
   # describe 'PUT update' do
