@@ -91,10 +91,11 @@ login_user(FactoryGirl.create(:login_user))
         expect(task.description).to eq(('a' * 50))
       end
     
-  #     it 'redirects to the updated project' do
-  #       put :update, id: @project, project: FactoryGirl.attributes_for(:second_project)
-  #       expect(response).to redirect_to @project
-  #     end
+      it 'redirects to the updated project' do
+        put :update, project_id: project.id, id: task,
+                     task: FactoryGirl.attributes_for(:task_two)
+        expect(response).to redirect_to Project.last
+      end
     end
     
   #   context 'invalid attributes' do
