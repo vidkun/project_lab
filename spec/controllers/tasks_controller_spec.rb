@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, :type => :controller do
-
-  before { single_login_user(create(:login_user)) }
+  let(:current_user) { create(:login_user) }
   let(:project) { create(:second_project) }
   let(:task) { create(:task_one, project: project) }
+
+  before { single_login_user(current_user) }
 
   describe 'GET index' do
     it 'successfully gets the index page' do
@@ -118,17 +119,30 @@ RSpec.describe TasksController, :type => :controller do
   end
 
   describe 'DELETE destroy' do
-    it 'deletes the task' do
-      @project = project
-      @task = task
-      expect{
-        delete :destroy, project_id: project.id, id: task
-      }.to change(Task,:count).by(-1)
+
+    context 'when the user is the owner of the task' do
+      let!(:task_owned) { create(:task_one, creator: current_user, project: project)}
+
+      it 'deletes the task' do
+        expect{
+          delete :destroy, project_id: project.id, id: task_owned
+        }.to change(Task,:count).by(-1)
+      end
+
+      it 'redirects to project' do
+        delete :destroy, project_id: project.id, id: task_owned
+        expect(response).to redirect_to projects_url
+      end
     end
-      
-    it 'redirects to project' do
-      delete :destroy, project_id: project.id, id: task
-      expect(response).to redirect_to projects_url
+
+    context 'when the user is not the owner of the task' do
+      let!(:task_not_owned) { create(:task_one, project: project)}
+
+      it 'deletes the task' do
+        expect{
+          delete :destroy, project_id: project.id, id: task_not_owned
+        }.to_not change(Task,:count)
+      end
     end
   end
 
