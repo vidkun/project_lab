@@ -29,6 +29,20 @@
                           order: [:month, :day, :year],
                           start_year: Time.now.year %>
   </div>
+  <hr>
+
+  <h3>Members</h3>
+  <div id="members">
+    <%= f.fields_for :project_members do |member| %>
+      <%= render 'project_member_fields', f: member %>
+    
+    <% end %>
+    <div class='links'>
+      <%= link_to_add_association 'Add Member', f, :project_members, class: "btn btn-default" %>
+    </div>  
+  </div>
+  <hr>
+  
   <h3>Tasks</h3>
   <div id="tasks">
     <%= f.fields_for :tasks do |task| %>
