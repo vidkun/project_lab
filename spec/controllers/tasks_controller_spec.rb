@@ -73,13 +73,13 @@ login_user(FactoryGirl.create(:login_user))
   describe 'PUT update' do
     context 'with valid attributes' do
       it 'located the requested @task' do
-        put :update, project_id: project.id, id: task,
+        patch :update, project_id: project.id, id: task,
                      task: FactoryGirl.attributes_for(:task_two)
         expect(assigns(:task)).to eq(task)      
       end
     
       it "changes @task's attributes" do
-        put :update, project_id: project.id, id: task,
+        patch :update, project_id: project.id, id: task,
                      task: FactoryGirl.attributes_for(:task_two,
                      name: 'newtaskname', description: ('a' * 50))
         task.reload
@@ -88,7 +88,7 @@ login_user(FactoryGirl.create(:login_user))
       end
     
       it 'redirects to the updated project' do
-        put :update, project_id: project.id, id: task,
+        patch :update, project_id: project.id, id: task,
                      task: FactoryGirl.attributes_for(:task_two)
         expect(response).to redirect_to Project.last
       end
@@ -96,13 +96,13 @@ login_user(FactoryGirl.create(:login_user))
     
     context 'invalid attributes' do
       it 'located the requested @task' do
-        put :update, project_id: project.id, id: task,
+        patch :update, project_id: project.id, id: task,
                      task: FactoryGirl.attributes_for(:invalid_task)
         expect(assigns(:task)).to eq(task)      
       end
       
       it "does not change @task's attributes" do
-        put :update, project_id: project.id, id: task,
+        patch :update, project_id: project.id, id: task,
                      task: FactoryGirl.attributes_for(:invalid_task, description: ('a' * 20))
         task.reload
         expect(task.name).to_not eq('newname')
@@ -110,7 +110,7 @@ login_user(FactoryGirl.create(:login_user))
       end
       
       it 're-renders the edit method' do
-        put :update, project_id: project.id, id: task,
+        patch :update, project_id: project.id, id: task,
                      task: FactoryGirl.attributes_for(:invalid_task)
         expect(response).to render_template :edit
       end
