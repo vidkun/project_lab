@@ -5,7 +5,7 @@ RSpec.describe Project, :type => :model do
 
     context "and it has invalid fields" do
 
-      subject { build(:first_project) }
+      subject { build(:invalid_project) }
 
       it 'should not have a blank name' do
         expect(subject.valid?).to eq(false)
