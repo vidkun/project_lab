@@ -113,10 +113,11 @@ login_user(FactoryGirl.create(:login_user))
         expect(task.description).to eq(task.description)
       end
       
-  #     it 're-renders the edit method' do
-  #       put :update, id: @project, project: FactoryGirl.attributes_for(:invalid_project)
-  #       expect(response).to render_template :edit
-  #     end
+      it 're-renders the edit method' do
+        put :update, project_id: project.id, id: task,
+                     task: FactoryGirl.attributes_for(:invalid_task)
+        expect(response).to render_template :edit
+      end
     end
   end
 
