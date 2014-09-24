@@ -118,11 +118,13 @@ login_user(FactoryGirl.create(:login_user))
   end
 
   describe 'DELETE destroy' do
-    # it 'deletes the task' do
-    #   expect{
-    #     delete :destroy, project_id: project.id, id: task
-    #   }.to change(Task,:count).by(-1)
-    # end
+    it 'deletes the task' do
+      @project = project
+      @task = task
+      expect{
+        delete :destroy, project_id: project.id, id: task
+      }.to change(Task,:count).by(-1)
+    end
       
     it 'redirects to project' do
       delete :destroy, project_id: project.id, id: task
