@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe ProjectsController, :type => :controller do
+  let(:main_user) { create(:login_user) }
+  let(:project) { create(:second_project, creator: main_user) }
+  let!(:second_project) { create(:third_project, creator: project.creator )}
+  let!(:project_without_access) { create(:project_without_access)}
 
-  before { single_login_user(create(:login_user)) }
-  let(:project) { create(:second_project) }
+  before { single_login_user(main_user) }
 
   describe 'GET index' do
+
     it 'successfully gets the index page' do
       get :index
       expect(response).to be_success
@@ -15,12 +19,19 @@ RSpec.describe ProjectsController, :type => :controller do
 
     it 'assigns the @projects variable' do
       get :index
-      expect(assigns(:projects)).to eq([project])
+      expect(assigns(:projects)).to eq([project, second_project])
+    end
+
+    it 'only returns projects user can access' do
+      get :index
+      expect(assigns(:projects)).to eq([project, second_project]) 
+      expect(assigns(:projects)).to_not include(project_without_access) 
+      # .each do |project| project.creator || project.members include current_user
     end
   end
 
   describe 'GET show' do
-    it 'successfully shows a project' do
+    it 'successfully shows a project a user belongs to' do
       get :show, id: project
       expect(response).to be_success
       expect(response).to have_http_status(200)
@@ -45,12 +56,12 @@ RSpec.describe ProjectsController, :type => :controller do
     context 'with valid data' do
       it 'should create a project' do
         expect{
-          post :create, project: FactoryGirl.attributes_for(:third_project)
+          post :create, project: FactoryGirl.attributes_for(:fourth_project)
         }.to change(Project,:count).by(1)
       end
 
       it 'redirects to the project page upon save' do
-        post :create, project: FactoryGirl.attributes_for(:third_project)
+        post :create, project: FactoryGirl.attributes_for(:fourth_project)
         expect(response).to redirect_to(Project.last)
       end
     end
