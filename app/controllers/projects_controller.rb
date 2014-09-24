@@ -14,12 +14,12 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @project.creator = current_user.name
+    @project.creator = current_user
   end
 
   def create
     @project = Project.new(project_params)
-    @project.creator = current_user.name
+    @project.creator = current_user
     titleize_params
     if @project.save
       redirect_to @project
