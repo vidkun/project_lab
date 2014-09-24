@@ -82,13 +82,14 @@ login_user(FactoryGirl.create(:login_user))
         expect(assigns(:task)).to eq(task)      
       end
     
-  #     it "changes @project's attributes" do
-  #       put :update, id: @project, 
-  #         project: FactoryGirl.attributes_for(:project, name: 'newname', description: ('a' * 50))
-  #       @project.reload
-  #       expect(@project.name).to eq('newname')
-  #       expect(@project.description).to eq(('a' * 50))
-  #     end
+      it "changes @task's attributes" do
+        put :update, project_id: project.id, id: task,
+                     task: FactoryGirl.attributes_for(:task_two,
+                     name: 'newtaskname', description: ('a' * 50))
+        task.reload
+        expect(task.name).to eq('newtaskname')
+        expect(task.description).to eq(('a' * 50))
+      end
     
   #     it 'redirects to the updated project' do
   #       put :update, id: @project, project: FactoryGirl.attributes_for(:second_project)
