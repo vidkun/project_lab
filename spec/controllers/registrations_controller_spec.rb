@@ -28,12 +28,12 @@ RSpec.describe RegistrationsController, :type => :controller do
     end
   end
 
-  describe 'PUT update' do
+  describe 'PATCH update' do
     context 'with valid attributes' do
       it 'located the requested @user', :authorized => true do
         user = User.last
 
-        put :update, {id: user, user: user.attributes.merge(:current_password => 'password') }
+        patch :update, {id: user, user: user.attributes.merge(:current_password => 'password') }
         expect(response.status).to be(302)
         expect(response).to redirect_to(root_path)
       end
