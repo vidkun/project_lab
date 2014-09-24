@@ -7,7 +7,7 @@ FactoryGirl.define do
       name "User Name"
       phone 8018018001
       password 'supersecret'
-      email 'user@email.com'
+      sequence(:email) {|n| "user+#{n}@email.com"}
     end
 
     factory :login_user do
