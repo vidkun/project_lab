@@ -19,7 +19,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
-  config.extend ControllerMacros, :type => :controller
+  config.include ControllerMacros, :type => :controller
 
   config.after(:suite) do
     DatabaseCleaner.clean_with(:truncation)
