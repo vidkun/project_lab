@@ -28,7 +28,8 @@ class TasksController < ApplicationController
         render :new
       end
     else
-      redirect_to project_path(@project), alert: 'Tasks can only be created by project members'
+      redirect_to project_path(@project),
+                  alert: 'Tasks can only be created by project members'
     end
   end
 
@@ -39,27 +40,37 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     if @task.authorized?(@user, 'update')
       if @task.update(task_params)
-        redirect_to @project, notice: 'Task was successfully updated.'
+        redirect_to @project,
+                    notice: 'Task was successfully updated.'
       else
         render :edit
       end
     else
-      redirect_to @project, notice: 'Tasks can only be edited by an assigned member.'
+      redirect_to @project,
+                  notice: 'Tasks can only be edited by an assigned member.'
     end
   end
 
   def destroy
     if @task.authorized?(@user, 'destroy')
       @task.destroy
-      redirect_to projects_url, notice: 'Task was successfully deleted.'
+      redirect_to projects_url,
+                  notice: 'Task was successfully deleted.'
     else
-      redirect_to @task.project, alert: 'Tasks can only be deleted by their creator.'
+      redirect_to @task.project,
+                  alert: 'Tasks can only be deleted by their creator.'
     end   
   end
 
   private
   def task_params
-    params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed, :project_id, :user_id, :creator)
+    params.require(:task).permit(:name,
+                                 :description,
+                                 :delivery_minutes,
+                                 :is_completed,
+                                 :project_id,
+                                 :user_id,
+                                 :creator)
   end
 
   def set_task
