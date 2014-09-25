@@ -6,6 +6,7 @@ RSpec.describe TasksController, :type => :controller do
   before { single_login_user(user) }
   let!(:project) { create(:second_project) }
   let!(:task) { create(:task_one, project: project, creator: user, user: user) }
+  let!(:member) { create(:project_member, project: project, user: user ) }
 
   describe 'GET index' do
     it 'successfully gets the index page' do
@@ -62,6 +63,20 @@ RSpec.describe TasksController, :type => :controller do
       it 're-renders the new method' do
         post :create, project_id: project.id, task: FactoryGirl.attributes_for(:invalid_task)
         expect(response).to render_template :new
+      end
+    end
+
+    context 'when user is not a project member' do
+      let(:user2) { FactoryGirl.create(:login_user) }
+      let(:project2) { FactoryGirl.create(:third_project,
+                                      name: 'no project here',
+                                      creator: user2) }
+
+      subject { post :create, project_id: project2.id, task: FactoryGirl.attributes_for(:task_two) }
+      
+      it 'redirects back to the project' do
+        expect(subject).to redirect_to project2
+        expect(subject.request.flash[:alert] ).to_not be_nil
       end
     end
   end
