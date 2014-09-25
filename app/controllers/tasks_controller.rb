@@ -33,16 +33,24 @@ class TasksController < ApplicationController
 
   def update
     @project = Project.find(params[:project_id])
-    if @task.update(task_params)
-      redirect_to @project, notice: 'Task was successfully updated.'
+    if @task.authorized?(@user, 'update')
+      if @task.update(task_params)
+        redirect_to @project, notice: 'Task was successfully updated.'
+      else
+        render :edit
+      end
     else
-      render :edit
+      redirect_to @project, notice: 'Tasks can only be edited by an assigned member.'
     end
   end
 
   def destroy
-    @task.destroy
-    redirect_to projects_url, notice: 'Task was successfully deleted.'
+    if @task.authorized?(@user, 'destroy')
+      @task.destroy
+      redirect_to projects_url, notice: 'Task was successfully deleted.'
+    else
+      redirect_to @task.project, alert: 'Tasks can only be deleted by their creator.'
+    end   
   end
 
   private
