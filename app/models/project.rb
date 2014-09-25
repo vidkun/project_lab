@@ -26,8 +26,7 @@ class Project < ActiveRecord::Base
   end
 
   def authorized?(user)
-    # binding.pry
-    return true if self.members.include? user
+    return self.members.include?(user) ? true : false
   end
 
   private

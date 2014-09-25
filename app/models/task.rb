@@ -8,8 +8,8 @@ class Task < ActiveRecord::Base
 
   def authorized?(user, action, project=nil)
     case action
-    when 'new'
-      return true if project.members.include? user
+    # when 'create'
+    #   return true if project.members.include? user
     when 'update', 'destroy'
       return true if self.user == user
     end
