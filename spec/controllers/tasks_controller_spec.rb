@@ -111,6 +111,42 @@ RSpec.describe TasksController, :type => :controller do
         expect(response).to render_template :edit
       end
     end
+
+    context 'user is not assigned task' do
+      it "doesn't changes task's attributes" do
+        user2 = FactoryGirl.create(:login_user)
+        project2 = FactoryGirl.create(:second_project,
+                                      name: 'no project here',
+                                      creator: user2)
+        task2 = FactoryGirl.create(:task_one,
+                                   user: user2,
+                                   name: 'no task here',
+                                   project: project2,
+                                   creator: user2)
+
+        patch :update, project_id: project2.id, id: task2,
+                     task: FactoryGirl.attributes_for(:task_two,
+                     name: 'newtaskname', description: ('a' * 50))
+        task.reload
+        expect(task2.name).to_not eq('newtaskname')
+        expect(task2.description).to_not eq(('a' * 50))
+      end
+    
+      it 'redirects back to the project' do
+        user2 = FactoryGirl.create(:login_user)
+        project2 = FactoryGirl.create(:second_project,
+                                      name: 'no project here',
+                                      creator: user2)
+        task2 = FactoryGirl.create(:task_one,
+                                   user: user2,
+                                   name: 'no task here',
+                                   project: project2,
+                                   creator: user2)
+        patch :update, project_id: project2.id, id: task2,
+                     task: FactoryGirl.attributes_for(:task_two)
+        expect(response).to redirect_to project2
+      end
+    end
   end
 
   describe 'DELETE destroy' do
