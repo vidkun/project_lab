@@ -7,6 +7,8 @@ FactoryGirl.define do
       name "Task name"
       description "This is the task description. This is the task description. This is the task description."
       delivery_minutes 20
+      association :creator
+      association :user
     end
 
     factory :task_two do
