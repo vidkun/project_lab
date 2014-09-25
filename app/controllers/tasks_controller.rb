@@ -18,13 +18,17 @@ class TasksController < ApplicationController
 
   def create
     @project = Project.find(params[:project_id])
-    @task = @project.tasks.build(task_params)
-    @task.creator = current_user.name
+    if @project.authorized?(@user)
+      @task = @project.tasks.build(task_params)
+      @task.creator = current_user.name
 
-    if @task.save
-      redirect_to project_path(@project)
+      if @task.save
+        redirect_to project_path(@project)
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to project_path(@project), alert: 'Tasks can only be created by project members'
     end
   end
 
