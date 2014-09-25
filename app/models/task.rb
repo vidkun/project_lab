@@ -5,6 +5,16 @@ class Task < ActiveRecord::Base
   validates :description, length: { minimum: 50 }
   validates :delivery_minutes, numericality: { greater_than: 0 }
 
+
+  def authorized?(user, action, project=nil)
+    case action
+    when 'new'
+      return true if project.members.include? user
+    when 'edit', 'destroy'
+      return true if self.user == user
+    end
+  end
+
   private
   def user_is_a_project_member
     self.users << self.creator
