@@ -10,7 +10,7 @@ class Task < ActiveRecord::Base
     case action
     when 'new'
       return true if project.members.include? user
-    when 'edit', 'destroy'
+    when 'update', 'destroy'
       return true if self.user == user
     end
   end
