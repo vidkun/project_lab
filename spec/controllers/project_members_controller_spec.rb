@@ -26,12 +26,14 @@ RSpec.describe ProjectMembersController, :type => :controller do
     context 'with invalid data' do
       it 'does not save the new project member' do
         expect{
-          post :create, project_id: project.id, project_member: {user_id: 'a'}
+          post :create, project_id: project.id,
+                        project_member: {user_id: 'a'}
         }.to_not change(ProjectMember,:count)
       end
       
       it 're-renders the new method' do
-        post :create, project_id: project.id, project_member: {user_id: 'a'}
+        post :create, project_id: project.id,
+                      project_member: {user_id: 'a'}
         expect(response).to render_template :new
       end
     end
@@ -39,7 +41,8 @@ RSpec.describe ProjectMembersController, :type => :controller do
 
   describe 'DELETE destroy' do
     it "should redirect to the project's page" do
-      delete :destroy, project_id: project.id, id: FactoryGirl.create(:project_member)
+      delete :destroy, project_id: project.id,
+                       id: FactoryGirl.create(:project_member)
       expect(response).to redirect_to project
     end
   end
