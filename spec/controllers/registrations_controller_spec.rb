@@ -33,7 +33,8 @@ RSpec.describe RegistrationsController, :type => :controller do
       it 'located the requested @user', :authorized => true do
         user = User.last
 
-        patch :update, {id: user, user: user.attributes.merge(:current_password => 'password') }
+        patch :update, {id: user,
+                        user: user.attributes.merge(:current_password => 'password') }
         expect(response.status).to be(302)
         expect(response).to redirect_to(root_path)
       end
