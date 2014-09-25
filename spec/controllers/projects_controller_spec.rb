@@ -40,7 +40,6 @@ RSpec.describe ProjectsController, :type => :controller do
     it 'fails to show a project user is not authorized to access' do
       get :show, id: project_without_access
       expect(response).to_not be_success
-      # expect(response).to redirect_to(:index)
     end
 
     it 'assigns the requested project to @project' do
@@ -89,40 +88,48 @@ RSpec.describe ProjectsController, :type => :controller do
     
     context 'with valid attributes' do
       it 'located the requested @project' do
-        patch :update, id: project, project: FactoryGirl.attributes_for(:second_project)
+        patch :update, id: project, 
+                       project: FactoryGirl.attributes_for(:second_project)
         expect(assigns(:project)).to eq(project)      
       end
     
       it "changes @project's attributes" do
         patch :update, id: project, 
-          project: FactoryGirl.attributes_for(:project, name: 'newname', description: ('a' * 50))
+                       project: FactoryGirl.attributes_for(:project, 
+                                                           name: 'newname',
+                                                           description: ('a' * 50))
         project.reload
         expect(project.name).to eq('newname')
         expect(project.description).to eq(('a' * 50))
       end
     
       it 'redirects to the updated project' do
-        patch :update, id: project, project: FactoryGirl.attributes_for(:second_project)
+        patch :update, id: project,
+                       project: FactoryGirl.attributes_for(:second_project)
         expect(response).to redirect_to project
       end
     end
     
     context 'invalid attributes' do
       it 'located the requested @project' do
-        patch :update, id: project, project: FactoryGirl.attributes_for(:invalid_project)
+        patch :update, id: project,
+                       project: FactoryGirl.attributes_for(:invalid_project)
         expect(assigns(:project)).to eq(project)      
       end
       
       it "does not change @project's attributes" do
         patch :update, id: project, 
-          project: FactoryGirl.attributes_for(:project, name: 'newname', description: ('a' * 20))
+                       project: FactoryGirl.attributes_for(:project,
+                                                           name: 'newname',
+                                                           description: ('a' * 20))
         project.reload
         expect(project.name).to_not eq('newname')
         expect(project.description).to eq(project.description)
       end
       
       it 're-renders the edit method' do
-        patch :update, id: project, project: FactoryGirl.attributes_for(:invalid_project)
+        patch :update, id: project,
+                       project: FactoryGirl.attributes_for(:invalid_project)
         expect(response).to render_template :edit
       end
     end
