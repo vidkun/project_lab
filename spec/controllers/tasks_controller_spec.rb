@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe TasksController, :type => :controller do
 
-  before { single_login_user(create(:login_user)) }
-  let(:project) { create(:second_project) }
-  let(:task) { create(:task_one, project: project) }
+  let!(:user) { create(:login_user) }
+  before { single_login_user(user) }
+  let!(:project) { create(:second_project) }
+  let!(:task) { create(:task_one, project: project, creator: user, user: user) }
 
   describe 'GET index' do
     it 'successfully gets the index page' do
@@ -13,11 +14,6 @@ RSpec.describe TasksController, :type => :controller do
       expect(response).to have_http_status(200)
       expect(response).to render_template(:index)
     end
-
-    # it 'assigns the @task variable' do
-    #   get :index, project_id: project.id
-    #   expect(assigns(:task)).to eq([task])
-    # end
   end
 
   describe 'GET show' do
@@ -129,6 +125,23 @@ RSpec.describe TasksController, :type => :controller do
     it 'redirects to project' do
       delete :destroy, project_id: project.id, id: task
       expect(response).to redirect_to projects_url
+    end
+
+    context 'user is not assigned task' do
+      it 'redirects to project' do
+        user2 = FactoryGirl.create(:login_user)
+        project2 = FactoryGirl.create(:second_project,
+                                      name: 'no project here',
+                                      creator: user2)
+        task2 = FactoryGirl.create(:task_one,
+                                   user: user2,
+                                   name: 'no task here',
+                                   project: project2,
+                                   creator: user2)
+
+        delete :destroy, project_id: project2.id, id: task2
+        expect(response).to redirect_to project2
+      end
     end
   end
 
