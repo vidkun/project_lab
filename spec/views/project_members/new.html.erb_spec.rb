@@ -3,6 +3,7 @@ require 'spec_helper'
 
 RSpec.describe "project_members/new.html.erb", :type => :view do
 include Rails.application.routes.url_helpers
+  GET 'project_members/new'
 	
 
 	describe 'has an h1 tag' do 
