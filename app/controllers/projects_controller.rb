@@ -40,7 +40,8 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to @project, notice: 'Project was successfully updated.'
+      redirect_to @project,
+                  notice: 'Project was successfully updated.'
     else
       render :edit
     end
@@ -48,12 +49,28 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path, notice: 'Project was successfully deleted.'
+    redirect_to projects_path,
+                notice: 'Project was successfully deleted.'
   end
 
   private
   def project_params
-    params.require(:project).permit(:name, :description, :due_date_at, :creator, tasks_attributes: [:id, :name, :description, :is_completed, :delivery_minutes, :project_id, :_destroy, :user_id, :creator], project_members_attributes:[:id, :user_id, :project_id])
+    params.require(:project).permit(:name,
+                                    :description,
+                                    :due_date_at,
+                                    :creator,
+                                    tasks_attributes: [:id,
+                                                       :name,
+                                                       :description,
+                                                       :is_completed,
+                                                       :delivery_minutes,
+                                                       :project_id,
+                                                       :_destroy,
+                                                       :user_id,
+                                                       :creator],
+                                    project_members_attributes:[:id,
+                                                                :user_id,
+                                                                :project_id])
   end
 
   def set_project

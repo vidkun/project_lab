@@ -18,12 +18,14 @@ class ProjectMembersController < ApplicationController
   def destroy
     @project_member = ProjectMember.find(params[:id])
     @project_member.destroy
-    redirect_to project_path(@project), notice: 'Member was successfully deleted.'
+    redirect_to project_path(@project),
+                notice: 'Member was successfully deleted.'
   end
 
   private
   def project_member_params
-    params.require(:project_member).permit(:project_id, :user_id)
+    params.require(:project_member).permit(:project_id,
+                                           :user_id)
   end
 
   def set_project
