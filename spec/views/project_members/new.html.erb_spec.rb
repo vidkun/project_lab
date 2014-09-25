@@ -3,38 +3,26 @@ require 'spec_helper'
 
 RSpec.describe "project_members/new.html.erb", :type => :view do
 include Rails.application.routes.url_helpers
-  GET 'project_members/new'
 	
-
+	#I have no idea... but it works?
 	describe 'has an h1 tag' do 
 		it 'sees h1 tag' do
-			node = page.find('h1')
-			node.native.inner_html.should include('Add A New Project Member')
-			# it should have_selector("h1") do |content|
-   			# content.should (:new, :value => "Add A New Project Member")
+			within('h1') do
+  				expect(page).to have_content('Add A New Project Member')
+  			end
   		end
   	end
-
+  	#I think this works too? - looks for 'Back & Submit'
+  	#in the form partial for project_members 
+  	#... insert 'ihavenoideawhatimdoingdog.jpeg'
+  	describe 'has a form' do 
+		it 'sees form' do
+			within('form') do
+  				expect(page).to have_content('Back')
+  				expect(page).to have_content('Submit')
+  			end
+  		end
+  	end
+  	#it doesn't fail bundle exec rspec...still prob
+  	#no bueno 
 end
-
-	# it 'sees h1 tag' do  
-		# @page = 'project_members/new'
-		# @page.should have_tag("h1") 
-		# end
-
-# it 'sees h1 tag' do 
-		# should have_tag('h1', :exact => 'Add A New Project Member')
-		# end
-		# it 'sees h1 tag?' do
-		# response.should_have_selector("h1")
-		# end
-
-	# describe 'Render Form Partial' do
-	# 	it 'renders the form partial' do 
-	# 	render
-	# 	response.should render_template(:partial => "form" )
-	# 	end
-	# end 
-
-	
-
