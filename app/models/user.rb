@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     self.tasks.find_by(id: task.id) || task.creator == self
   end
 
+  def can_delete_task?(task)
+    task.creator == self
+  end
+
   def delete_member(project, member)
     member_to_delete = member if project.creator == self
     member_to_delete.destroy if member_to_delete
