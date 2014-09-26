@@ -1,0 +1,26 @@
+<div class="nested-fields">
+  <div class= 'field form-group'>
+    <%= f.label :name, 'Task Name:' %><br>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class= 'field form-group'>
+    <%= f.label :description, 'Task Description:' %><br>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+    <%= f.hidden_field :creator, value: @user.name if f.object.creator.nil?%>
+  <div class= 'field form-group'>
+    <%= f.label :user_id, 'Assign to: ' %>
+    <%= f.select :user_id, @project.users.all.map {|user| [user.name, user.id]}, class: 'form-control' %>
+  </div>
+  <div class= 'field form-group'>
+    <%= f.label :due_date_at, 'Task Delivery Minutes:' %><br>
+    <%= f.number_field :delivery_minutes %>
+  </div>
+  <div class= 'field form-group'>
+    <%= f.label :is_completed, 'Task Status:' %>
+    <%= f.select :is_completed, [['Complete', true], ['Incomplete', false]], 
+                                selected: false, class: 'form-control' %>
+  </div>
+  <%= link_to_remove_association "Remove task", f, class: "btn btn-default" %>
+</div>
+<br>
