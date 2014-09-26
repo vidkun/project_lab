@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     member_to_delete.destroy if member_to_delete
   end
 
+  def can_add_member?(project)
+    project.creator == self
+  end
+
   private
   def name_is_not_test
     errors.add(:name, 'cannot be test') if self.name == 'test'
