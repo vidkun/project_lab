@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     task_to_delete.destroy if task_to_delete
   end
 
+  def can_edit_task?(task)
+    self.tasks.find_by(id: task.id) || task.creator == self
+  end
+
   private
   def name_is_not_test
     errors.add(:name, 'cannot be test') if self.name == 'test'
