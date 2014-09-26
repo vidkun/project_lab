@@ -3,7 +3,7 @@ class ProjectMembersController < ApplicationController
 
 
   def new
-    redirect_to project_path(@project), notice: "Can't do that" unless @project && current_user.can_add_member?(@project)
+    redirect_to project_path(@project), notice: "Could not add member" unless @project && current_user.can_add_member?(@project)
     @project_member = ProjectMember.new
   end
 

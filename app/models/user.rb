@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     project.creator == self
   end
 
+  def can_edit_project?(project)
+    project.creator == self
+  end
+
   private
   def name_is_not_test
     errors.add(:name, 'cannot be test') if self.name == 'test'

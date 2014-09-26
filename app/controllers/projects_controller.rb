@@ -33,6 +33,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    redirect_to project_path(@project), notice: "Only project creator" unless @project && current_user.can_edit_project?(@project)
     unless @project
       redirect_to root_path, notice: "Project not found"
     end
