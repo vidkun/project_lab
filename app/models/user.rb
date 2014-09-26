@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   def delete_task(task)
     task_to_delete = self.tasks.find_by(id: task.id)
+    task_to_delete ||= task if task.creator == self
     task_to_delete.destroy if task_to_delete
   end
 
