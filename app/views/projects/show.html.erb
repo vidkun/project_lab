@@ -19,8 +19,10 @@
     </li>
   <% end %>
 </ul>
-<%= link_to 'Add New Member', new_project_project_member_path(@project), class: "btn btn-default"  %>
 
+<% if current_user == @project.creator %>
+<%= link_to 'Add New Membersr', new_project_project_member_path(@project), class: "btn btn-default"  %>
+<% end %>
 
 <h3>Project Tasks:</h3>
 <%= render 'tasks/tasks' %>
