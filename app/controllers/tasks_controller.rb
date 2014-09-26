@@ -2,12 +2,12 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :find_user
 
-
   def index
     @tasks = Task.all
   end
 
   def show
+    redirect_to root_path, notice: "Task not found" unless @project
   end
 
   def new
@@ -29,6 +29,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    redirect_to root_path, notice: "Task not found" unless @project && can_edit_task?
   end
 
   def update
@@ -51,8 +52,12 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @project = Project.find(params[:project_id])
-    @task = Task.find(params[:id])
+    @project = current_user.projects.find_by(id: params[:project_id])
+    @task = @project.tasks.find_by(id: params[:id]) if @project
+  end
+
+  def can_edit_task?
+    @task && current_user.can_edit_task?(@task)
   end
 
   def find_user
