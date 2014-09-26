@@ -89,15 +89,15 @@ projects:
         description: 'Task by Jack for Jack. Now that you have it, go do it Jack!!',
         delivery_minutes: 10,
         is_completed: 10,
-        creator: 'Fred',
-        user: 'Fred'
+        creator: 'Jack',
+        user: 'Grizz'
       },
       {
         name: "Task by Jack for Grizz",
         description: 'Task by Jack for Grizz. Now that you have it, go do it Grizz!!',
         delivery_minutes: 10,
         is_completed: 10,
-        creator: 'Fred',
-        user: 'Kim'
+        creator: 'Jack',
+        user: 'Grizz'
       }
     ]

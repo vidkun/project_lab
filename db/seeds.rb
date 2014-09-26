@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-users = ['Sam', 'Jane','Fred','Kim','Jack']
+# users = ['Sam', 'Jane','Fred','Kim','Jack']
 
 seed_file = Rails.root.join('db', 'seeds.yml')
 seed_data = YAML::load_file(seed_file)
