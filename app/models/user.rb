@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :project_members
-  has_many :projects, through: :project_members
+  has_many :projects, -> {distinct}, through: :project_members
   has_many :tasks
 
   devise :database_authenticatable, :registerable,
