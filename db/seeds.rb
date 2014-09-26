@@ -20,8 +20,9 @@ seed_data['projects'].map do |project_name, project_data|
   project_data['creator'] = project_data['users'].first
   project_data['due_date_at'] = Time.now()+1.month
   project_data['tasks'].map! do |task|
-    task['creator'] = User.find_by(name: task['creator'].capitalize)
+    task['creator_id'] = User.find_by(name: task['creator'].capitalize).id
     task['user'] = User.find_by(name: task['user'].capitalize)
+    task.except!('creator')
     Task.create!(task)
   end
   Project.create!(project_data)
