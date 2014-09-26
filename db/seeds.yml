@@ -1,0 +1,103 @@
+default_passwords: &default_passwords
+  password: 'password'
+  password_confirmation: 'password'
+
+users:
+  sam:
+    name: 'Sam'
+    email: 'sam@email.com'
+    <<: *default_passwords
+    phone: 1111111111
+  jane:
+    name: 'Jane'
+    email: 'jane@email.com'
+    <<: *default_passwords
+    phone: 2222222222
+  fred:
+    name: 'Fred'
+    email: 'fred@email.com'
+    <<: *default_passwords
+    phone: 3333333333
+  kim:
+    name: 'Kim'
+    email: 'Kim@email.com'
+    <<: *default_passwords
+    phone: 4444444444
+  jack:
+    name: 'Jack'
+    email: 'jack@email.com'
+    <<: *default_passwords
+    phone: 5555555555
+  grizz:
+    name: 'Grizz'
+    email: 'grizz@email.com'
+    <<: *default_passwords
+    phone: 6666666666
+
+projects:
+  one:
+    name: 'Project One'
+    description: 'This is the project one. With description to fit 50 characters'
+    users: [sam, jane]
+    tasks: [
+      {
+        name: "Task by Sam",
+        description: 'Task by Sam for Sam. Now that you have it, go do it Sam!!',
+        delivery_minutes: 10,
+        is_completed: 10,
+        creator: 'Sam',
+        user: 'Sam'
+      },
+      {
+        name: "Task by Sam for Jane",
+        description: 'Task by Sam for Jane. Now that you have it, go do it Jane!!',
+        delivery_minutes: 10,
+        is_completed: 10,
+        creator: 'Sam',
+        user: 'Jane'
+      }
+    ]
+  two:
+    name: 'Project Two'
+    description: 'This is the project two. With description to fit 50 characters'
+    users: [fred, kim]
+    tasks: [
+      {
+        name: "Task by Fred",
+        description: 'Task by Fred for Fred. Now that you have it, go do it Fred!!',
+        delivery_minutes: 10,
+        is_completed: 10,
+        creator: 'Fred',
+        user: 'Fred'
+      },
+      {
+        name: "Task by Fred for Kim",
+        description: 'Task by Fred for Kim. Now that you have it, go do it Kim!!',
+        delivery_minutes: 10,
+        is_completed: 10,
+        creator: 'Fred',
+        user: 'Kim'
+      }
+    ]
+  three:
+    name: 'Project Three'
+    description: 'This is the project three. With description to fit 50 characters'
+    users: [jack, grizz]
+    tasks: [
+      {
+        name: "Task by Jack",
+        description: 'Task by Jack for Jack. Now that you have it, go do it Jack!!',
+        delivery_minutes: 10,
+        is_completed: 10,
+        creator: 'Jack',
+        user: 'Grizz'
+      },
+      {
+        name: "Task by Jack for Grizz",
+        description: 'Task by Jack for Grizz. Now that you have it, go do it Grizz!!',
+        delivery_minutes: 10,
+        is_completed: 10,
+        creator: 'Jack',
+        user: 'Grizz'
+      }
+    ]

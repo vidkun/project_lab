@@ -5,11 +5,15 @@ class ProjectsController < ApplicationController
   before_action :find_user
 
   def index
-    @projects = Project.all.order(:due_date_at)
+    @projects = current_user.projects.order(:due_date_at)
   end
 
   def show
-    @tasks = @project.tasks
+    if @project
+      @tasks = @project.tasks
+    else
+      redirect_to root_path, notice: "Project not found"
+    end
   end
 
   def new
@@ -29,14 +33,20 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-
+    unless @project
+      redirect_to root_path, notice: "Project not found"
+    end
   end
 
   def update
-    if @project.update(project_params)
-      redirect_to @project, notice: 'Project was successfully updated.'
+    unless @project
+      redirect_to root_path, notice: "Project not found"
     else
-      render :edit
+      if @project.update(project_params)
+        redirect_to @project, notice: 'Project was successfully updated.'
+      else
+        render :edit
+      end
     end
   end
 
@@ -51,11 +61,11 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find_by(id: params[:id])
   end
 
   def titleize_params
-    @project.name = @project.name.titleize
+    @project.name = @project.name.titleize if @project
   end
 
   def find_user
