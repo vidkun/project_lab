@@ -13,7 +13,9 @@
     Delivery Minutes: <%= task.delivery_minutes %><br> 
     Status: <%= task.is_completed ? 'Complete' : 'Incomplete' %>
   <br>
+  <% if current_user.can_edit_task?(task) %>
     <%= link_to 'Edit Task', edit_project_task_path(@project, task), class: "btn btn-default" %>
+  <% end %>  
   </p>
   <hr>
 <% end %>
