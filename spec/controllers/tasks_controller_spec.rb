@@ -2,23 +2,33 @@ require 'rails_helper'
 
 RSpec.describe TasksController, :type => :controller do
   let(:current_user) { create(:login_user) }
-  let(:project) { create(:second_project) }
-  let(:task) { create(:task_one, project: project) }
+  let(:project) { create(:second_project, creator: current_user) }
+  let(:task) { create(:task_one, project: project, creator: current_user) }
 
   before { single_login_user(current_user) }
 
   describe 'GET index' do
-    it 'successfully gets the index page' do
-      get :index, project_id: project.id
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
-      expect(response).to render_template(:index)
+
+    context 'when a user is assigned the task' do
+      before { task.update_attributes(user_id: current_user.id) }
+
+      it 'successfully gets the index page' do
+        get :index, project_id: project.id
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+        expect(response).to render_template(:index)
+      end
     end
 
-    # it 'assigns the @task variable' do
-    #   get :index, project_id: project.id
-    #   expect(assigns(:task)).to eq([task])
-    # end
+    context 'when a user is not assigned to the task' do
+      let(:other_project) { create(:second_project) }
+      let!(:other_task) { create(:task_one, project: other_project) }
+
+      it 'redirects to the root' do
+        get :index, project_id: other_project.id
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 
   describe 'GET show' do
@@ -29,9 +39,19 @@ RSpec.describe TasksController, :type => :controller do
       expect(response).to render_template(:show)
     end
 
-     it 'assigns the requested task to @task' do
+    it 'assigns the requested task to @task' do
       get :show, project_id: project.id, id: task
       expect(assigns(:task)).to eq(task)
+    end
+
+    context 'when a user is not assigned to the task' do
+      let(:other_project) { create(:second_project) }
+      let!(:other_task) { create(:task_one, project: other_project) }
+
+      it 'redirects to the root' do
+        get :show, project_id: other_project.id, id: other_task
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 

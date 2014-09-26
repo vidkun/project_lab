@@ -1,9 +1,11 @@
 class TasksController < ApplicationController
+  before_action :set_project, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :find_user
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
+    redirect_to root_path, notice: "No tasks found for user" if @project.nil? || @tasks.empty?
   end
 
   def show
@@ -33,7 +35,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:project_id])
     if @task.update(task_params)
       redirect_to @project, notice: 'Task was successfully updated.'
     else
@@ -51,8 +52,11 @@ class TasksController < ApplicationController
     params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed, :project_id, :user_id, :creator)
   end
 
-  def set_task
+  def set_project
     @project = current_user.projects.find_by(id: params[:project_id])
+  end
+
+  def set_task
     @task = @project.tasks.find_by(id: params[:id]) if @project
   end
 
