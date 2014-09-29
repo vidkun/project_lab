@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
     if @project
       @tasks = @project.tasks
       @task = Task.new
+      @project_member = ProjectMember.new
     else
       redirect_to root_path, notice: "Project not found"
     end

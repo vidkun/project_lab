@@ -21,7 +21,7 @@
 </ul>
 
 <% if current_user.can_add_member?(@project) %>
-<%= link_to 'Add New Member', new_project_project_member_path(@project), class: "btn btn-default"  %>
+  <%= link_to "Add New Member",'#addMember', data: {toggle: 'modal', target: '#addMember'}, class: "btn btn-primary" %>
 <% end %>
 
 <h3>Project Tasks:</h3>
@@ -49,6 +49,21 @@
       </div>
       <div class="modal-body">
         <%= render 'tasks/form'%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Members-->
+<div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="newMember" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="newMember">New Member</h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'project_members/form'%>
       </div>
     </div>
   </div>

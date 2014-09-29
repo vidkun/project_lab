@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_for [@project, @project_member], html: { role: 'form' } do |f| %>
 <% if @project_member.errors.any? %>
   <div id='error_explanation'>
@@ -13,7 +14,7 @@
   <div class= 'form-group'>
     <div class= 'field form-group'>
       <%= f.label :user_id, 'Add Member:' %><br>
-      <%= f.select :user_id, User.all.map {|user| [user.name, user.id]}, class: 'form-control' %>
+      <%= f.select :user_id, User.all.map {|user| [user.name, user.id]}, {}, class: 'form-control' %>
     </div>
   </div>
   <p>
@@ -23,3 +24,4 @@
 
 
 <% end %>
+</div>
