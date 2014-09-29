@@ -5,7 +5,7 @@ RSpec.describe Project, :type => :model do
 
     context "and it has invalid fields" do
 
-      subject { build(:first_project) }
+      subject { build(:invalid_project) }
 
       it 'should not have a blank name' do
         expect(subject.valid?).to eq(false)
@@ -49,6 +49,13 @@ RSpec.describe Project, :type => :model do
       it 'should have a due date in the future' do
         expect(subject.valid?).to eq(true)
         expect(subject.errors[:due_date_at].any?).to eq(false)
+      end
+
+      it 'should add the creator as a team member' do
+        expect(subject.valid?).to eq(true)
+        subject.save!
+
+        expect(subject.members).to include(subject.creator)
       end
 
     end

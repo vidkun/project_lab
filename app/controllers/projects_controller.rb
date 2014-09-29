@@ -5,21 +5,25 @@ class ProjectsController < ApplicationController
   before_action :find_user
 
   def index
-    @projects = Project.all.order(:due_date_at)
+    @projects = current_user.projects.order(:due_date_at)
   end
 
   def show
-    @tasks = @project.tasks
+    if @project
+      @tasks = @project.tasks
+    else
+      redirect_to root_path, notice: "Project not found"
+    end
   end
 
   def new
     @project = Project.new
-    @project.user_id = current_user.id
+    @project.creator = current_user
   end
 
   def create
     @project = Project.new(project_params)
-    @project.user_id = current_user.id
+    @project.creator = current_user
     titleize_params
     if @project.save
       redirect_to @project
@@ -29,14 +33,20 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-
+    unless @project
+      redirect_to root_path, notice: "Project not found"
+    end
   end
 
   def update
-    if @project.update(project_params)
-      redirect_to @project, notice: 'Project was successfully updated.'
+    unless @project
+      redirect_to root_path, notice: "Project not found"
     else
-      render :edit
+      if @project.update(project_params)
+        redirect_to @project, notice: 'Project was successfully updated.'
+      else
+        render :edit
+      end
     end
   end
 
@@ -47,15 +57,15 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :description, :due_date_at, :user_id, tasks_attributes: [:id, :name, :description, :is_completed, :delivery_minutes, :project_id, :_destroy, :user_id, :creator])
+    params.require(:project).permit(:name, :description, :due_date_at, :creator, tasks_attributes: [:id, :name, :description, :is_completed, :delivery_minutes, :project_id, :_destroy, :user_id, :creator], project_members_attributes:[:id, :user_id, :project_id])
   end
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find_by(id: params[:id])
   end
 
   def titleize_params
-    @project.name = @project.name.titleize
+    @project.name = @project.name.titleize if @project
   end
 
   def find_user

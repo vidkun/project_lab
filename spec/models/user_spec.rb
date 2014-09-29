@@ -36,4 +36,33 @@ RSpec.describe User, :type => :model do
       expect(user.valid?).to eq(true)
     end
   end
+
+  context "when is deleting a task" do
+    let(:project) { create(:second_project) }
+    let(:user_with_task) { create(:first_user) }
+
+    context "and the user is assigned to the task" do
+      subject! { create(:task_one, user_id: user_with_task.id) }
+
+      it 'can be deleted' do
+        user_with_task.reload
+        expect{
+          expect(user_with_task.delete_task(subject)).to_not be_nil
+        }.to change(Task, :count).by(-1)
+      end
+    end
+
+    context "and the user is NOT assigned to the task" do
+      subject! { create(:task_one, user_id: create(:first_user).id) }
+
+      it 'cannot be deleted' do
+        user_with_task.reload
+        expect{
+          expect(user_with_task.delete_task(subject)).to be_nil
+        }.to change(Task, :count).by(0)
+      end
+    end
+  end
+
+
 end

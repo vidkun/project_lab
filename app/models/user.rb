@@ -1,13 +1,26 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  has_many :projects
+  has_many :project_members
+  has_many :projects, -> {distinct}, through: :project_members
   has_many :tasks
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  
   validates :name, presence: true
   validate :name_is_not_test
   validates :phone, numericality: { greater_than: 0 }, length: { is: 10 }
+
+  def delete_task(task)
+    task_to_delete = self.tasks.find_by(id: task.id)
+    task_to_delete ||= task if task.creator == self
+    task_to_delete.destroy if task_to_delete
+  end
+
+  def can_edit_task?(task)
+    self.tasks.find_by(id: task.id) || task.creator == self
+  end
 
   private
   def name_is_not_test

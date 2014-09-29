@@ -6,36 +6,24 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-users = ['Sam', 'Jane','Fred','Kim','Jack']
+# users = ['Sam', 'Jane','Fred','Kim','Jack']
 
-users.each do |user|
-  User.create!(
-    name: user,
-    email: "#{user}@email.com",
-    password: 'password',
-    password_confirmation: 'password',
-    phone: 8015551234)
+seed_file = Rails.root.join('db', 'seeds.yml')
+seed_data = YAML::load_file(seed_file)
+
+seed_data['users'].each do |user_name, user_data|
+  User.create!(user_data)
 end
 
-
-User.all.each do |user|
-  Project.create!(
-    name: "#{user.name}'s Project",
-    description: "This project was created by #{user.name}. This project was created by #{user.name}. This project was created by #{user.name}. This project was created by #{user.name}. ",
-    due_date_at: "2015-09-29 00:00:00",
-    user_id: user.id)
-end
-
-User.all.each do |user|
-  Project.all.each do |project|
-    Task.create!(
-      name: "#{user.name}'s task for #{project.name} ",
-      description: "This task is #{project.name}. This task is in #{project.name}. This task is in #{project.name}. " ,
-      delivery_minutes: 10,
-      is_completed: false,
-      project_id: project.id,
-      creator: user.name,
-      user_id: user.id == 1 ? 5 : user.id - 1)
+seed_data['projects'].map do |project_name, project_data|
+  project_data['users'].map!{|user_name| User.find_by(name: user_name.capitalize) }
+  project_data['creator'] = project_data['users'].first
+  project_data['due_date_at'] = Time.now()+1.month
+  project_data['tasks'].map! do |task|
+    task['creator_id'] = User.find_by(name: task['creator'].capitalize).id
+    task['user'] = User.find_by(name: task['user'].capitalize)
+    task.except!('creator')
+    Task.create!(task)
   end
+  Project.create!(project_data)
 end
-
