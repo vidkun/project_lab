@@ -20,7 +20,10 @@
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to 'Start A Project', new_project_path %></li>
+        <li><%= link_to new_project_path, class: 'glyphicon glyphicon-plus' do %>
+          <span>New Project</span>
+          <% end %>
+        </li>
         <% if user_signed_in? %>
           <li><%= link_to 'Users', users_path %></li>
         <% end %>
