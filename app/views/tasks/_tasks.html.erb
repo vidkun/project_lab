@@ -4,7 +4,7 @@
   <p>
     <strong class="task_name"><%= task.name %></strong>
   <br>
-    Created by: <%= task.creator%>
+    Created by: <%= task.creator.name%>
   <br>
     Assigned to: <%= task.user.name %>
   <br>
@@ -13,7 +13,9 @@
     Delivery Minutes: <%= task.delivery_minutes %><br> 
     Status: <%= task.is_completed ? 'Complete' : 'Incomplete' %>
   <br>
+  <% if current_user.can_edit_task?(task) %>
     <%= link_to 'Edit Task', edit_project_task_path(@project, task), class: "btn btn-default" %>
+  <% end %>  
   </p>
   <hr>
 <% end %>

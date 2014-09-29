@@ -45,6 +45,9 @@
   
   <h3>Tasks</h3>
   <div id="tasks">
+    <%= f.fields_for :tasks do |task| %>
+      <%= render 'tasks/task_fields', f: task %>
+    <% end %>
     <div class='links'>
       <%= link_to_add_association 'Add task', f, :tasks, 
                                 class: "btn btn-default",
