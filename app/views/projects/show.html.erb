@@ -48,7 +48,7 @@
         <h4 class="modal-title" id="newTask">New Task</h4>
       </div>
       <div class="modal-body">
-        <%= render 'tasks/form'%>
+        <%= render partial: 'tasks/form', locals: {project: (@project || @task.project), task: (@task || @project.tasks.new ) }%>
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
         <h4 class="modal-title" id="newMember">New Member</h4>
       </div>
       <div class="modal-body">
-        <%= render 'project_members/form'%>
+        <%= render partial: 'project_members/form', locals: {project: (@project || @task.project), project_member: (@project_member || @project.project_members.new ) }%>
       </div>
     </div>
   </div>
