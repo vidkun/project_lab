@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_for [@project, @task], html: { role: 'form' } do |f| %>
   <!-- Check if there were any errors saving project task and display them if so -->
   <% if @task.errors.any? %>
@@ -38,3 +39,4 @@
     <%= f.submit 'Submit', class: 'btn btn-primary' %> 
   </p>
 <% end %>
+</div>
