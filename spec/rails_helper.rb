@@ -20,9 +20,12 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.include ControllerMacros, :type => :controller
+  config.include Warden::Test::Helpers, :type => :acceptance
+  config.include FeatureSupport
 
   config.after(:suite) do
     DatabaseCleaner.clean_with(:truncation)
+    load "#{Rails.root}/db/seeds.rb"
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"

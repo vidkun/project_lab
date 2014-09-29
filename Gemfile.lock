@@ -32,6 +32,12 @@ GEM
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.2.2)
+    capybara (2.4.3)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     cocoon (1.2.6)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -71,8 +77,11 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.0)
     minitest (5.4.1)
     multi_json (1.10.1)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.5)
@@ -97,6 +106,11 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.5)
       sprockets-rails (~> 2.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
     railties (4.1.5)
       actionpack (= 4.1.5)
       activesupport (= 4.1.5)
@@ -163,12 +177,15 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   bootstrap-sass (~> 3.2.0)
+  capybara
   cocoon
   coffee-rails (~> 4.0.0)
   database_cleaner
@@ -180,6 +197,7 @@ DEPENDENCIES
   pry-nav
   pry-rails
   rails (= 4.1.5)
+  rails_12factor
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
