@@ -26,4 +26,16 @@ feature "User project management" do
     end
   end
 
+  scenario "As a user, I can edit the tasks that are assigned to me" do
+    visit 'projects/1'
+    expect(page).to have_content('Sam')
+
+    first(:link, 'Edit Task').click
+    expect(page).to have_content('Edit Project Task')
+    fill_in('task_name', with: 'Edited task')
+    click_on('Submit')
+    
+           
+  end
+
 end
