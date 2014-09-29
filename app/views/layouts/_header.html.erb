@@ -20,15 +20,17 @@
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to new_project_path, class: 'glyphicon glyphicon-plus' do %>
-          <span>New Project</span>
+        <li>
+          <%= link_to new_project_path, class: 'glyphicon glyphicon-plus' do %>
+            <span>New Project</span>
           <% end %>
         </li>
         <% if user_signed_in? %>
-          <li><%= link_to users_path, class: 'glyphicon glyphicon-user' do %>
-          <span>Users</span>
-          <% end %>
-        </li>
+          <li>
+            <%= link_to users_path, class: 'glyphicon glyphicon-user' do %>
+              <span>Users</span>
+            <% end %>
+          </li>
         <% end %>
         <% if user_signed_in? %>
         <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
