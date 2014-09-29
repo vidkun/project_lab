@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: project_lab_production
-  username: project_lab
-  password: <%= ENV['PROJECT_LAB_DATABASE_PASSWORD'] %>
+  # username: project_lab
+  # password: <%= ENV['PROJECT_LAB_DATABASE_PASSWORD'] %>

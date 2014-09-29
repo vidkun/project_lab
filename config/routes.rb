@@ -18,7 +18,10 @@ Rails.application.routes.draw do
   end
 
   resources :users, :only => [:show, :index]
-  
+
+  namespace :admin do
+    resources :projects, only: [:index]
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
