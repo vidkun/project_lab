@@ -49,20 +49,10 @@
       <%= render 'tasks/task_fields', f: task %>
     <% end %>
     <div class='links'>
-<<<<<<< HEAD
-      <%= link_to_add_association 'Add task', f, :tasks, class: "btn btn-warning" %>
+      <%= link_to_add_association 'Add task', f, :tasks, class: 'btn btn-warning', :partial => 'tasks/task_fields' %>
     </div>  
   </div>
   <%= f.submit 'Submit', class: 'btn btn-success' %> 
-=======
-      <%= link_to_add_association 'Add task', f, :tasks, 
-                                class: "btn btn-default",
-                                :partial => 'tasks/task_fields' %>
-    </div>  
-  </div>
-  
-  <%= f.submit 'Submit', class: 'btn btn-primary' %> 
->>>>>>> 36fd6ee80a9cc9a98bd6ed5733fb68ba5f871845
   
   <%= link_to 'Back', root_path, class: 'btn btn-primary' %>
 <% end %>
