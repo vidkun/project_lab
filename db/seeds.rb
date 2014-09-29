@@ -15,6 +15,10 @@ seed_data['users'].each do |user_name, user_data|
   User.create!(user_data)
 end
 
+if (user = User.find_by(name: 'Grizz' ))
+  user.update_attributes(is_admin: true)
+end
+
 seed_data['projects'].map do |project_name, project_data|
   project_data['users'].map!{|user_name| User.find_by(name: user_name.capitalize) }
   project_data['creator'] = project_data['users'].first

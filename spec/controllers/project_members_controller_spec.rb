@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ProjectMembersController, :type => :controller do
+  let!(:current_user) { create(:login_user) }
+  let!(:project) { create(:second_project, creator: current_user) }
 
-  before { single_login_user(create(:login_user)) }
-  let!(:project) { create(:second_project) }
+  before { single_login_user(current_user) }
 
   describe 'GET new' do
     it 'returns http success' do

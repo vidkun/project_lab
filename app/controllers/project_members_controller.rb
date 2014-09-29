@@ -1,7 +1,9 @@
 class ProjectMembersController < ApplicationController
   before_action :set_project
 
+
   def new
+    redirect_to project_path(@project), notice: "Could not add member" unless @project && current_user.can_add_member?(@project)
     @project_member = ProjectMember.new
   end
 
@@ -16,9 +18,9 @@ class ProjectMembersController < ApplicationController
   end
 
   def destroy
-    @project_member = ProjectMember.find(params[:id])
-    @project_member.destroy
-    redirect_to project_path(@project), notice: 'Member was successfully deleted.'
+    @project_member = @project.project_members.find_by(id: params[:id]) if @project 
+    notice = current_user.delete_member(@project, @project_member) ? 'Member was successfully deleted' : 'Could not delete member'
+    redirect_to project_path(@project), notice: notice
   end
 
   private
