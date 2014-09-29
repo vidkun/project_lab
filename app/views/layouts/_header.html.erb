@@ -33,9 +33,17 @@
           </li>
         <% end %>
         <% if user_signed_in? %>
-        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-off' do %>
+              <span>Sign-Out</span>
+            <% end %>
+          </li>
         <% else %>
-        <li><%= link_to 'Sign In', new_user_session_path %></li>
+        <li>
+            <%= link_to new_user_session_path, class: 'glyphicon glyphicon-off' do %>
+              <span>Sign-In</span>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
