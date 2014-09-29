@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20140926200302) do
     t.datetime "due_date_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "creator"
     t.integer  "user_id"
   end
 
