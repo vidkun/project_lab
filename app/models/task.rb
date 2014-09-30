@@ -5,4 +5,5 @@ class Task < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :description, length: { minimum: 50 }
   validates :delivery_minutes, numericality: { greater_than: 0 }
+  scope :completed, -> { where(is_completed: true) }
 end
