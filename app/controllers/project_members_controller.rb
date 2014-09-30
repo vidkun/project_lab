@@ -22,8 +22,12 @@ class ProjectMembersController < ApplicationController
 
   def destroy
     @project_member = @project.project_members.find_by(id: params[:id]) if @project 
-    notice = current_user.delete_member(@project, @project_member) ? 'Member was successfully deleted' : 'Could not delete member'
-    redirect_to project_path(@project), notice: notice
+    @notice = current_user.delete_member(@project, @project_member) ? 'Member was successfully deleted' : 'Could not delete member'
+
+    respond_to do |format|
+      format.html { redirect_to project_path(@project), notice: notice }
+      format.js
+    end 
   end
 
   private

@@ -1,0 +1,5 @@
+<% if @project_member.destroyed? %>
+  $("#user-<%= @project_member.user_id %>").remove();
+<% else %>
+  alert('<%= @notice %>');
+<% end %>
