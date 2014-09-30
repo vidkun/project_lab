@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   validate :name_is_not_test
   validates :phone, numericality: { greater_than: 0 }, length: { is: 10 }
 
+  scope :not_in_project, ->(project) { joins(:project_members).where("user_id NOT IN (?)", project.users.pluck(:id)) }
+
   def delete_task(task)
     task_to_delete = self.tasks.find_by(id: task.id)
     task_to_delete ||= task if task.creator == self
