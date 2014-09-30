@@ -10,11 +10,14 @@ class ProjectMembersController < ApplicationController
   def create
     @project_member = @project.project_members.build(project_member_params)
 
-    if @project_member.save
-      redirect_to project_path(@project)
-    else
-      render :new
-    end
+    respond_to do |format|
+      if @project_member.save
+        format.html { redirect_to(project_path(@project)) }
+        format.js
+      else
+        format.js
+      end
+    end 
   end
 
   def destroy
