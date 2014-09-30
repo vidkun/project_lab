@@ -1,13 +1,13 @@
 <h1><%= @project.name %></h1>
-<h2>Owner: <%= @project.creator.name %></h2>
-
-<h3>Description:</h3>
+<h3>Owner: <%= @project.creator.name %></h3>
+<br>
+<h4>Description:</h4>
 <p><%= @project.description %></p>
 
-<h3>Due Date:</h3>
+<h4>Due Date:</h4>
 <p><%= @project.due_date_at.localtime.strftime("%A, %b %-d, %Y  %l:%M%p") %></p>
 
-<h3>Members:</h3>
+<h4>Members:</h4>
 <ul>
   <% @project.users.each do |member|%>
     <li><%= member.name %>
@@ -24,7 +24,7 @@
 <%= link_to 'Add New Membersr', new_project_project_member_path(@project), class: "btn btn-default"  %>
 <% end %>
 
-<h3>Project Tasks:</h3>
+<h4>Project Tasks:</h4>
 <%= render 'tasks/tasks' %>
 
 
