@@ -30,7 +30,7 @@ class Project < ActiveRecord::Base
   end
 
   def percent_complete
-    @percent_complete = (self.completed_tasks.count / self.tasks.count.to_f) * 100.0
+    100.0 * (self.completed_tasks.count / self.tasks.count.to_f)
   end
 
   private
