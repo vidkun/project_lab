@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
 
   def show
     if @project
-      @tasks = @project.tasks
+      @task = Task.new
     else
       redirect_to root_path, notice: "Project not found"
     end
