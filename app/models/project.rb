@@ -25,12 +25,8 @@ class Project < ActiveRecord::Base
     self.users
   end
 
-  def completed_tasks
-    self.tasks.where(is_completed: true)
-  end
-
   def percent_complete
-    100.0 * (self.completed_tasks.count / self.tasks.count.to_f)
+    100.0 * (self.tasks.completed.count / self.tasks.count.to_f)
   end
 
   private
