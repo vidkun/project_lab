@@ -8,6 +8,8 @@ progress and remaining tasks.
 </p>
 <br>
 
+
+
 <table class='table table-hover'>
   <thead>
     <tr>
@@ -37,4 +39,48 @@ progress and remaining tasks.
     <% end %>
   </tbody>
 </table>
+<br>
+<br>
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <%= image_tag("dpl1.png", :alt=> "DPL Labs", class: 'img-responsive center-block' ) %>
+      <div class="carousel-caption">
+        <h3>LEARN IT!</h3>
+        <p>DevPoint Labs</p>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag("dpl2.png", :alt=> "Code It", class: 'img-responsive center-block') %>
+      <div class="carousel-caption">
+        <h3>CODE IT!</h3>
+        <p>DevPoint Labs</p>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag("dpl3.png", :alt=> "Build It", class: 'img-responsive center-block') %>
+      <div class="carousel-caption">
+        <h3>BUILD IT!</h3>
+        <p>DevPoint Labs</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
 
