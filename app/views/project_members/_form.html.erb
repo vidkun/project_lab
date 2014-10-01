@@ -1,10 +1,11 @@
-<%= form_for [@project, @project_member], html: { role: 'form' } do |f| %>
-<% if @project_member.errors.any? %>
+<div class="container">
+<%= form_for [project, project_member], html: { role: 'form' }, remote: true do |f| %>
+<% if project_member.errors.any? %>
   <div id='error_explanation'>
-    <h2><%= pluralize(@project_member.errors.count, "error") %> prohibited
+    <h2><%= pluralize(project_member.errors.count, "error") %> prohibited
         this project member from being saved:</h2>
     <ul>
-      <% @project_member.errors.full_messages.each do |msg| %>
+      <% project_member.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
@@ -13,13 +14,14 @@
   <div class= 'form-group'>
     <div class= 'field form-group'>
       <%= f.label :user_id, 'Add Member:' %><br>
-      <%= f.select :user_id, User.all.map {|user| [user.name, user.id]}, class: 'form-control' %>
+      <%= f.select :user_id, User.not_in_project(project).map {|user| [user.name, user.id]}, {}, class: 'form-control' %>
     </div>
   </div>
   <p>
-    <%= link_to 'Back', project_path(@project), class: 'btn btn-default' %>
+    <%= link_to 'Back', project_path(project), class: 'btn btn-default' %>
     <%= f.submit 'Submit', class: 'btn btn-primary' %> 
   </p>
 
 
 <% end %>
+</div>
