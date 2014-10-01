@@ -6,8 +6,9 @@ module Apis
     def get_ip_data(ip_address)
       url = "#{URL}#{ip_address}"
       url += (url.match(/\/$/) ? '' : '/') + 'json'
-      raw_json = get_data(url)
-      @data = JSON.parse(raw_json)
+      # raw_json = get_data(url)
+      response = HTTParty.get(url)
+      @data = JSON.parse(response.body)
     end
 
     def get_lat_and_lon(ip_address=nil)
@@ -21,13 +22,6 @@ module Apis
 
     def get_last_request_city()
       @data['city']
-    end
-
-    private
-    # ex. get_url("http://ipinfo.io/json")
-    def get_data(url)
-      uri = URI.parse(url)
-      Net::HTTP.get(uri)
     end
   end
 end
