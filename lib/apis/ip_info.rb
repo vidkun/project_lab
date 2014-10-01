@@ -1,6 +1,5 @@
 module Apis
   module IpInfo
-
     URL = 'http://ipinfo.io/'
 
     def get_ip_data(ip_address)
@@ -11,16 +10,16 @@ module Apis
       @data = JSON.parse(response.body)
     end
 
-    def get_lat_and_lon(ip_address=nil)
+    def get_lat_and_lon(ip_address = nil)
       ip_data = self.get_ip_data(ip_address.to_s)
-      Hash[["lat", 'lon'].zip(ip_data['loc'].split(','))]
+      Hash[%w(lat lon).zip(ip_data['loc'].split(','))]
     end
 
-    def get_last_request_ip()
+    def last_request_ip
       @data['ip']
     end
 
-    def get_last_request_city()
+    def last_request_city
       @data['city']
     end
   end
