@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def can_delete_task?(task)    
-    gstask.creator == self   
+    task.creator == self
   end
 
   def can_edit_task?(task)
