@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     task_to_delete.destroy if task_to_delete
   end
 
+  def can_delete_task?(task)    
+    gstask.creator == self   
+  end
+
   def can_edit_task?(task)
     self.tasks.find_by(id: task.id) || task.creator == self
   end
