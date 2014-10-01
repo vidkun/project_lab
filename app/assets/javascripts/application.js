@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require cocoon
 //= require bootstrap-sprockets
-//= require turbolinks
 //= require_tree .
 
 $( document ).ready(function(){

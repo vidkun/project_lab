@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_for [@project, @task], html: { role: 'form' } do |f| %>
   <!-- Check if there were any errors saving project task and display them if so -->
   <% if @task.errors.any? %>
@@ -22,7 +23,7 @@
   </div>
   <div class= 'field form-group'>
     <%= f.label :user_id, 'Assign to:' %><br>
-    <%= f.select :user_id, @project.users.all.map {|user| [user.name, user.id]}, class: 'form-control' %>
+    <%= f.select :user_id, @project.users.all.map {|user| [user.name, user.id]}, {}, class: 'form-control' %>
   </div>
   <div class= 'form-group'>
     <%= f.label :due_date_at, 'Task Delivery Minutes:' %><br>
@@ -38,3 +39,4 @@
     <%= f.submit 'Submit', class: 'btn btn-success' %> 
   </p>
 <% end %>
+</div>
