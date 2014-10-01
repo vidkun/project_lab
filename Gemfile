@@ -42,6 +42,7 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'devise'
 gem 'cocoon'
+gem 'httparty'
 
 group :development, :test do
   gem 'pry-rails'
