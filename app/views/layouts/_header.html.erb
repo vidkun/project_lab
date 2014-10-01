@@ -26,7 +26,7 @@
             <span>New Project</span>
           <% end %>
         </li>
-        <% if user_signed_in? %>
+        <% if user_signed_in? && current_user.is_admin == true %>
           <li>
             <%= link_to users_path, class: 'glyphicon glyphicon-user' do %>
               <span>Users</span>
