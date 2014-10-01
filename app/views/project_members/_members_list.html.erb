@@ -1,0 +1,14 @@
+<ul>
+  <% project_object.users.each do |member|%>
+    <li id="user-<%= member.id %>"><%= member.name %>
+      <% if current_user == project_object.creator %>
+        <%= link_to 'Delete', 
+              project_project_member_path(project_object.id,member.project_members.find_by(project_id: project_object.id, user_id: member.id).id), 
+              method: :delete, 
+              data: { confirm: 'Are you sure you want to delete this member?'}, 
+              class: "btn btn-xs btn-default",
+              remote: true  %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
