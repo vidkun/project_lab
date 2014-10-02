@@ -17,7 +17,11 @@
         <td><%= user.name %></td>
         <td><%= user.phone %></td>
         <td><%= user.email %></td>
-        <td><%= user.is_github_authorized? %></td>
+        <td>
+          <% if user.is_github_authorized? %>
+            <i class="fa fa-github-alt"></i> <%= user.github_username %>
+          <% end %>
+        </td>
         <td><%= link_to 'View User', user, class: 'btn btn-xs btn-info' %></td>
       </tr>
     <% end %>
