@@ -41,6 +41,15 @@ class User < ActiveRecord::Base
     project.creator == self
   end
 
+  def generate_github_state!
+    self.update_attributes(github_state: self.generate_github_state)
+    self.github_state
+  end
+
+  def generate_github_state
+    SecureRandom.hex
+  end
+
   private
   def name_is_not_test
     errors.add(:name, 'cannot be test') if self.name == 'test'
