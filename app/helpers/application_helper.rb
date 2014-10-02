@@ -1,5 +1,6 @@
 module ApplicationHelper
   include Apis::IpInfo
+  include Apis::Github
 
   def get_weather_widget(request)
     ip = request.remote_ip unless request.remote_ip == '127.0.0.1'
@@ -8,5 +9,9 @@ module ApplicationHelper
     iframe_src = 'http://forecast.io/embed/#' + lat_and_lon.to_query
     html = '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="' + iframe_src + '"> </iframe>'
     raw html
+  end
+
+  def github_authorize_button()
+    link_to "Link To Github", generate_authorize_url(current_user), class: 'btn btn-primary'
   end
 end
