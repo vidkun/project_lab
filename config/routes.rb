@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'project_members/destroy'
 
+  get 'apis/callback', to: 'apis#github_callback', as: 'github_callback'
+
   root 'projects#index'
  
 
