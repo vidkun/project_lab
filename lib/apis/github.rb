@@ -7,6 +7,7 @@ module Apis
     def generate_authorize_url(user, options={})
       options[:state] = user.generate_github_state! unless options.has_key?(:state)
       options[:client_id] = ENV['GITHUB_CLIENT_ID']
+      options[:redirect_uri] = options[:redirect_uri] || github_callback_path()
       "#{AUTHORIZE_URL}?#{options.to_query}"
     end
   end

@@ -12,6 +12,6 @@ module ApplicationHelper
   end
 
   def github_authorize_button()
-    link_to "Link To Github", generate_authorize_url(current_user), class: 'btn btn-primary'
+    link_to "Link To Github", generate_authorize_url(current_user, redirect_uri: github_callback_url()), class: 'btn btn-primary'
   end
 end
