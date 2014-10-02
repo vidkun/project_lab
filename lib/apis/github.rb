@@ -1,6 +1,6 @@
 module Apis
   module Github
-    include HTTParty
+    include HTTParty # https://github.com/jnunemaker/httparty
 
     AUTHORIZE_URL = 'https://github.com/login/oauth/authorize'
     ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token'
@@ -22,8 +22,8 @@ module Apis
         :client_secret => ENV['GITHUB_CLIENT_SECRET'],
         # :redirect_uri => redirect_url
       }
-      response = HTTParty.post(ACCESS_TOKEN_URL, :query => params)
-      Rack::Utils.parse_nested_query(response)['access_token']
+      response = self.post(ACCESS_TOKEN_URL, :query => params)
+      response['access_token']
     end
   end
 end
