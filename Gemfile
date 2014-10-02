@@ -45,6 +45,7 @@ gem 'cocoon'
 gem 'httparty'
 
 group :development, :test do
+  gem 'dotenv'
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'spring-commands-rspec'
