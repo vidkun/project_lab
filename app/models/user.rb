@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     SecureRandom.hex
   end
 
+  def authorized_for_github!(authorized_token)
+    self.update_attributes(github_access_token: authorized_token, github_state: 'completed')
+  end
+
   private
   def name_is_not_test
     errors.add(:name, 'cannot be test') if self.name == 'test'
