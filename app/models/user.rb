@@ -55,6 +55,10 @@ class User < ActiveRecord::Base
     self.update_attributes(github_access_token: authorized_token, github_state: 'completed')
   end
 
+  def is_github_authorized?
+    self[:github_access_token] && self[:github_state] == 'completed'
+  end
+
   private
   def name_is_not_test
     errors.add(:name, 'cannot be test') if self.name == 'test'
