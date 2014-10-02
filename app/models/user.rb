@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :phone, numericality: { greater_than: 0 }, length: { is: 10 }
 
   scope :not_in_project, ->(project) { joins(:project_members).where("user_id NOT IN (?)", project.users.pluck(:id)) }
+  scope :with_github_state, ->(state_param) { where(github_state: state_param).where.not(github_state: nil) }
 
   def delete_task(task)
     task_to_delete = self.tasks.find_by(id: task.id)
