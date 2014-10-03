@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations', :omniauth_callbacks => "apis" }
 
+  # devise_scope :user do
+  #   get '/apis', to: 'apis#main'
+  # end
+
   resources :projects do
     resources :tasks
     resources :project_members, :only => [:new, :create, :destroy]

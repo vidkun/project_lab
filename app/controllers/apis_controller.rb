@@ -23,4 +23,9 @@ class ApisController < Devise::OmniauthCallbacksController
     end
   end
 
+  # def main
+  #   request
+  #   params
+  # end
+
 end
