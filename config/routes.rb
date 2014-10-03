@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   root 'projects#index'
  
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
-    # index page listing out all projects
+  devise_for :users, :controllers => { registrations: 'registrations', :omniauth_callbacks => "apis" }
+
+  # devise_scope :user do
+  #   get '/apis', to: 'apis#main'
+  # end
 
   resources :projects do
     resources :tasks
