@@ -72,9 +72,9 @@ class ProjectsController < ApplicationController
                                                        :_destroy,
                                                        :user_id,
                                                        :creator],
-                                    project_members_attributes:[:id,
-                                                                :user_id,
-                                                                :project_id])
+                                    project_members_attributes: [:id,
+                                                                 :user_id,
+                                                                 :project_id])
   end
 
   def set_project
