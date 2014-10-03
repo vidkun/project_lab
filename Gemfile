@@ -43,6 +43,7 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'cocoon'
 gem 'httparty'
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'dotenv-rails'
