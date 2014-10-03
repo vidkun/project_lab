@@ -86,7 +86,8 @@ class User < ActiveRecord::Base
   end
 
   private
+
   def name_is_not_test
-    errors.add(:name, 'cannot be test') if self.name == 'test'
+    errors.add(:name, 'cannot be test') if name == 'test'
   end
 end
