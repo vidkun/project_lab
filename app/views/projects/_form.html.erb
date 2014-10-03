@@ -14,11 +14,11 @@
   <!-- Begin rendering the form -->
   <div class= 'form-group'>
     <%= f.label :name, 'Project Name:' %><br>
-    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.text_field :name, class: 'form-control', id: 'focusedInput', type: 'text', autofocus: 'autofocus'  %>
   </div>
   <div class= 'form-group'>
     <%= f.label :description, 'Project Description:' %><br>
-    <%= f.text_field :description, class: 'form-control' %>
+    <%= f.text_field :description, class: 'form-control', id: 'focusedInput', type: 'text', autofocus: 'autofocus'  %>
   </div>
   </div>
   <div class= 'form-group'>
@@ -38,7 +38,7 @@
     
     <% end %>
     <div class='links'>
-      <%= link_to_add_association 'Add Member', f, :project_members, class: "btn btn-default" %>
+      <%= link_to_add_association 'Add Member', f, :project_members, class: "btn btn-danger" %>
     </div>  
   </div>
   <hr>
@@ -49,13 +49,10 @@
       <%= render 'tasks/task_fields', f: task %>
     <% end %>
     <div class='links'>
-      <%= link_to_add_association 'Add task', f, :tasks, 
-                                class: "btn btn-default",
-                                :partial => 'tasks/task_fields' %>
+      <%= link_to_add_association 'Add task', f, :tasks, class: 'btn btn-warning', :partial => 'tasks/task_fields' %>
     </div>  
   </div>
+  <%= f.submit 'Submit', class: 'btn btn-success' %> 
   
-  <%= f.submit 'Submit', class: 'btn btn-primary' %> 
-  
-  <%= link_to 'Back', root_path, class: 'btn btn-default' %>
+  <%= link_to 'Back', root_path, class: 'btn btn-primary' %>
 <% end %>

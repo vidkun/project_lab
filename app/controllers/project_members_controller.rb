@@ -1,6 +1,7 @@
+
+
 class ProjectMembersController < ApplicationController
   before_action :set_project
-
 
   def new
     redirect_to project_path(@project), notice: "Could not add member" unless @project && current_user.can_add_member?(@project)

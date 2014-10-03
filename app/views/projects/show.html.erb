@@ -1,5 +1,5 @@
 <h1><%= @project.name %></h1>
-<h2>Owner: <%= @project.creator.name %></h2>
+<h3>Owner: <%= @project.creator.name %></h3>
 
 <h3>Description:</h3>
 <p><%= @project.description %></p>
@@ -16,7 +16,12 @@
   <%= link_to "Add New Member",'#addMember', data: {toggle: 'modal', target: '#addMember'}, class: "btn btn-primary" %>
 <% end %>
 
-<h3>Project Tasks:</h3>
+<h4>Project Tasks:</h4>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="<%= @project.percent_complete %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @project.percent_complete %>%;">
+    <span><%= @project.percent_complete.round(2) %>% Complete</span>
+  </div>
+</div>
 <%= render 'tasks/tasks' %>
 
 

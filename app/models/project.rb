@@ -25,6 +25,10 @@ class Project < ActiveRecord::Base
     self.users
   end
 
+  def percent_complete
+    100.0 * (self.tasks.completed.count / self.tasks.count.to_f)
+  end
+
   private
   def add_creator_as_project_member
     self.users << self.creator

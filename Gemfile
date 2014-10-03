@@ -42,8 +42,11 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'devise'
 gem 'cocoon'
+gem 'httparty'
+gem 'omniauth-github'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'spring-commands-rspec'
