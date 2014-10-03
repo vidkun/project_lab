@@ -78,7 +78,11 @@ class ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = current_user.projects.find_by(id: params[:id])
+    if current_user.admin?
+      @project = Project.find_by(id: params[:id])
+    else
+      @project = current_user.projects.find_by(id: params[:id])
+    end
   end
 
   def titleize_params
