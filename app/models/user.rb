@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validate :name_is_not_test
   validates :phone, numericality: { greater_than: 0 }, length: { is: 10 }
 
+  enum role: [:user, :admin]
+
   scope :not_in_project, ->(project) { joins(:project_members).where("user_id NOT IN (?)", project.users.pluck(:id)) }
   scope :with_github_state, ->(state_param) { where(github_state: state_param).where.not(github_state: nil) }
 
