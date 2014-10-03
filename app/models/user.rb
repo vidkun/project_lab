@@ -16,6 +16,17 @@ class User < ActiveRecord::Base
   scope :not_in_project, ->(project) { joins(:project_members).where("user_id NOT IN (?)", project.users.pluck(:id)) }
   scope :with_github_state, ->(state_param) { where(github_state: state_param).where.not(github_state: nil) }
 
+  def self.from_omniauth(auth)
+    where("email = ? OR provider = ? AND uid = ? ", auth.info.email, auth.provider, auth.uid).first_or_create do |user|
+    # where(email: auth.info.email).where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # assuming the user model has a name
+      # user.image = auth.info.image # assuming the user model has an image
+    end
+  end
+
   def delete_task(task)
     task_to_delete = self.tasks.find_by(id: task.id)
     task_to_delete ||= task if task.creator == self
