@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
     @user = User.build_with_temp_password(user_params)
 
     if @user.save
-      redirect_to admin_users_path, notice: 'User successfully created!'
+      redirect_to admin_user_path(@user), notice: 'User successfully created!'
     else
       render :new
     end
@@ -27,7 +27,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update_info(user_params)
-      redirect_to admin_users_path, notice: 'User successfully updated!'
+      redirect_to admin_user_path(@user), notice: 'User successfully updated!'
     else
       render :edit
     end
