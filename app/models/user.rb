@@ -47,25 +47,25 @@ class User < ActiveRecord::Base
     task_to_delete.destroy if task_to_delete
   end
 
-  def can_delete_task?(task)    
-    task.creator == self
+  def can_delete_task?(task)
+    task.creator == self || self.admin?
   end
 
   def can_edit_task?(task)
-    self.tasks.find_by(id: task.id) || task.creator == self
+    self.tasks.find_by(id: task.id) || task.creator == self || self.admin?
   end
 
   def delete_member(project, member)
-    member_to_delete = member if project.creator == self
+    member_to_delete = member if project.creator == self || self.admin?
     member_to_delete.destroy if member_to_delete
   end
 
   def can_add_member?(project)
-    project.creator == self
+    project.creator == self || self.admin?
   end
 
   def can_edit_project?(project)
-    project.creator == self
+    project.creator == self || self.admin?
   end
 
   def generate_github_state!

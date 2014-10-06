@@ -30,8 +30,8 @@ class Project < ActiveRecord::Base
   end
 
   private
+
   def add_creator_as_project_member
     self.users << self.creator
   end
-
 end
