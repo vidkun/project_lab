@@ -1,0 +1,34 @@
+<%= form_for([:admin, @user]) do |f| %>
+<% if @user.errors.any? %>
+    <div id='error_explanation'>
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited
+          this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Begin rendering the form -->
+  <div class= 'form-group'>
+    <%= f.label :name, 'Name:' %><br>
+    <%= f.text_field :name, placeholder: 'Name', class: 'form-control input-lg' %>
+  </div>
+  <div class= 'form-group'>
+    <%= f.label :phone, 'Email:' %><br>
+    <%= f.text_field :phone, placeholder: 'Email', class: 'form-control input-lg' %>
+  </div>
+  <div class= 'form-group'>
+    <%= f.label :email, 'Email:' %><br>
+    <%= f.text_field :email, placeholder: 'Email', class: 'form-control input-lg' %>
+  </div>
+  <%= f.hidden_field(:temp_password) %>
+  <%= f.hidden_field(:password) %>
+  <%= f.hidden_field(:password_confirmation) %>
+  
+  <%= f.submit 'Submit', class: 'btn btn-primary' %> 
+  
+  <%= link_to 'Back', admin_users_path, class: 'btn btn-danger' %>
+<% end %>
