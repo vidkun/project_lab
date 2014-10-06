@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   include CanAdmin
   before_action :authenticate_user!
-  before_action :ensure_admin!
+  before_action :can_admin?
   before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
@@ -39,10 +39,6 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-
-  def ensure_admin!
-    redirect_to root_path unless can_admin?
-  end
 
   def set_user
     @user = User.find(params[:id])
