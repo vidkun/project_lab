@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   include CanAdmin
   before_action :authenticate_user!
-  before_action :can_admin?
+  before_action :ensure_admin!
   before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
     @user = User.build_with_temp_password(user_params)
 
     if @user.save
-      redirect_to root_path, notice: 'User successfully created!'
+      redirect_to admin_users_path, notice: 'User successfully created!'
     else
       render :new
     end
@@ -27,7 +27,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update_info(user_params)
-      redirect_to root_path, notice: 'User successfully updated!'
+      redirect_to admin_users_path, notice: 'User successfully updated!'
     else
       render :edit
     end
@@ -35,10 +35,14 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to root_path, notice: 'User was successfully deleted'
+    redirect_to admin_users_path, notice: 'User was successfully deleted'
   end
 
   private
+
+  def ensure_admin!
+    redirect_to root_path unless can_admin?
+  end
 
   def set_user
     @user = User.find(params[:id])
