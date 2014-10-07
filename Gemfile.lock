@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/DevPointLabsFall2014/low_level.git
-  revision: 2507d8656a9f986f823fff064ada79f4a7b2fc5f
+  revision: 18a101a2fa91d80b1c21f95ade110285d61ea080
   specs:
-    low_level (0.1.0)
+    low_level (0.1.1)
       rails (~> 4.1.5)
 
 GEM
