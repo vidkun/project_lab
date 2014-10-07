@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'stats', to: 'stats#index', as: 'stats'
+  end
+
   get 'project_members/new'
 
   get 'project_members/create'
