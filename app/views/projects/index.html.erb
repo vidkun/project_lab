@@ -8,6 +8,10 @@ progress and remaining tasks.
 </p>
 <br>
 
+<% if current_user.is_admin? %>
+  <%= link_to "Refresh Cache", admin_projects_expire_cache_path() %>
+<% end %>
+
 
 
 <table class='table table-hover'>
