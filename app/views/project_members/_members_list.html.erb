@@ -1,7 +1,7 @@
 <ul>
   <% project_object.users.each do |member|%>
     <li id="user-<%= member.id %>"><%= member.name %>
-      <% if current_user == project_object.creator %>
+      <% if current_user.can_edit_project?(project_object) %>
         <%= link_to 'Delete', 
               project_project_member_path(project_object.id,member.project_members.find_by(project_id: project_object.id, user_id: member.id).id), 
               method: :delete, 

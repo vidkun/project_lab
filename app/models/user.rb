@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validate :name_is_not_test
   validates :phone, numericality: { greater_than: 0 }, length: { is: 10 }
 
+  enum role: [:user, :admin]
+
   scope :not_in_project, ->(project) { joins(:project_members).where("user_id NOT IN (?)", project.users.pluck(:id)) }
   scope :with_github_state, ->(state_param) { where(github_state: state_param).where.not(github_state: nil) }
 
@@ -45,25 +47,25 @@ class User < ActiveRecord::Base
     task_to_delete.destroy if task_to_delete
   end
 
-  def can_delete_task?(task)    
-    task.creator == self
+  def can_delete_task?(task)
+    task.creator == self || self.admin?
   end
 
   def can_edit_task?(task)
-    self.tasks.find_by(id: task.id) || task.creator == self
+    self.tasks.find_by(id: task.id) || task.creator == self || self.admin?
   end
 
   def delete_member(project, member)
-    member_to_delete = member if project.creator == self
+    member_to_delete = member if project.creator == self || self.admin?
     member_to_delete.destroy if member_to_delete
   end
 
   def can_add_member?(project)
-    project.creator == self
+    project.creator == self || self.admin?
   end
 
   def can_edit_project?(project)
-    project.creator == self
+    project.creator == self || self.admin?
   end
 
   def generate_github_state!
@@ -83,8 +85,26 @@ class User < ActiveRecord::Base
     self[:github_access_token] && self[:github_state] == 'completed'
   end
 
+  def self.build_with_temp_password(attributes = {})
+    token = Devise.friendly_token
+    attributes.merge!(temp_password: token,
+                      password: token,
+                      password_confirmation: token)
+    new(attributes)
+  end
+
+  def update_info(new_attributes)
+    new_attributes.merge!(temp_password: nil)
+    if new_attributes[:password].blank?
+      update_without_password(new_attributes)
+    else
+      update_attributes(new_attributes)
+    end
+  end
+
   private
+
   def name_is_not_test
-    errors.add(:name, 'cannot be test') if self.name == 'test'
+    errors.add(:name, 'cannot be test') if name == 'test'
   end
 end
