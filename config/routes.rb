@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :projects, only: [:index]
+    resources :users
   end
 
   get 'admin/projects/expire_cache' => 'admin/projects#expire_cache'

@@ -48,12 +48,17 @@ class TasksController < ApplicationController
   end
 
   private
+
   def task_params
     params.require(:task).permit(:name, :description, :delivery_minutes, :is_completed, :project_id, :user_id, :creator)
   end
 
   def set_project
-    @project = current_user.projects.find_by(id: params[:project_id])
+    if current_user.admin?
+      @project = Project.find_by(id: params[:project_id])
+    else
+      @project = current_user.projects.find_by(id: params[:id])
+    end
   end
 
   def set_task
