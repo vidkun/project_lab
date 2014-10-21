@@ -2,6 +2,11 @@ module ApplicationHelper
   include Apis::IpInfo
   include Apis::Github
 
+  def cache_key_for_projects(projects)
+    max_updated_at = projects.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "#{params[:controller]}-#{max_updated_at}"
+  end
+
   def get_weather_widget(request)
     ip = request.remote_ip unless request.remote_ip == '127.0.0.1'
     lat_and_lon = get_lat_and_lon(ip)
