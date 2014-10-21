@@ -26,7 +26,7 @@ progress and remaining tasks.
   </thead>
 
   <tbody>
-    <% cache("#{params[:controller]}_all_products", :skip_digest => true) do %>
+    <% cache(cache_key_for_projects(@projects), :skip_digest => true) do %>
       <% @projects.each do |project| %>
         <tr>
           <td><%= project.name %></td>
