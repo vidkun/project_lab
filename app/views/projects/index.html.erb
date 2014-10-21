@@ -8,8 +8,8 @@ progress and remaining tasks.
 </p>
 <br>
 
-<% if current_user.is_admin? %>
-  <%= link_to "Refresh Cache", admin_projects_expire_cache_path() %>
+<% if current_user.admin? %>
+  <%= link_to "Refresh Cache", admin_projects_expire_cache_path(controller_to_clear: params[:controller]) %>
 <% end %>
 
 
