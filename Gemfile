@@ -46,6 +46,7 @@ gem 'devise'
 gem 'cocoon'
 gem 'httparty'
 gem 'omniauth-github'
+gem 'dalli'
 
 group :development, :test do
   gem 'dotenv-rails'
