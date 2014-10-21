@@ -1,5 +1,3 @@
-
-
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
@@ -14,7 +12,7 @@ class ProjectsController < ApplicationController
     if @project
       @task = Task.new
     else
-      redirect_to root_path, notice: "Project not found"
+      redirect_to root_path, notice: 'Project not found'
     end
   end
 
@@ -35,7 +33,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    redirect_to project_path(@project), notice: "Only project creator can edit" unless @project && current_user.can_edit_project?(@project)
+    redirect_to project_path(@project), notice: 'Only project creator can edit' unless @project && current_user.can_edit_project?(@project)
     unless @project
       redirect_to root_path, notice: "Project not found"
     end
@@ -59,12 +57,32 @@ class ProjectsController < ApplicationController
   end
 
   private
+
   def project_params
-    params.require(:project).permit(:name, :description, :due_date_at, :creator, tasks_attributes: [:id, :name, :description, :is_completed, :delivery_minutes, :project_id, :_destroy, :user_id, :creator], project_members_attributes:[:id, :user_id, :project_id])
+    params.require(:project).permit(:name,
+                                    :description,
+                                    :due_date_at,
+                                    :creator,
+                                    tasks_attributes: [:id,
+                                                       :name,
+                                                       :description,
+                                                       :is_completed,
+                                                       :delivery_minutes,
+                                                       :project_id,
+                                                       :_destroy,
+                                                       :user_id,
+                                                       :creator],
+                                    project_members_attributes: [:id,
+                                                                 :user_id,
+                                                                 :project_id])
   end
 
   def set_project
-    @project = current_user.projects.find_by(id: params[:id])
+    if current_user.admin?
+      @project = Project.find_by(id: params[:id])
+    else
+      @project = current_user.projects.find_by(id: params[:id])
+    end
   end
 
   def titleize_params
