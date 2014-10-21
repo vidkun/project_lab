@@ -8,8 +8,4 @@ class Admin::ProjectsController < ApplicationController
     render 'projects/index'
   end
 
-  def expire_cache
-    expire_fragment("#{params[:controller_to_clear]}_all_products")
-    redirect_to action: :index
-  end
 end
