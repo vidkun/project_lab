@@ -9,7 +9,7 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def expire_cache
-    expire_fragment('all_available_products')
+    expire_fragment("#{params[:controller_to_clear]}_all_products")
     redirect_to action: :index
   end
 end
