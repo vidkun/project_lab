@@ -55,6 +55,12 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'rails_best_practices'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-rails_best_practices'
+  gem 'guard-livereload', require: false
+  gem "rack-livereload"
 end
 
 group :development do
