@@ -33,6 +33,7 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @users %>
+<%= paginate @users %><br/>
+<%= page_entries_info @users %>
 <hr>
 <%= link_to 'Add User', new_admin_user_path, class: 'btn btn-sm btn-primary' %>
